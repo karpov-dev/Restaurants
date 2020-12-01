@@ -1,0 +1,27 @@
+<template>
+    <c-modal-window>
+        <p slot="header">Authorization</p>
+        <div slot="mainSpace">
+            <c-auth-with-registration onlogin={closeAuthModal}></c-auth-with-registration>
+        </div>
+    </c-modal-window>
+
+    <div class="header shadow">
+        <lightning-card title="Restaurant Rent" icon-name="standard:lead_list">
+            <div slot="actions">
+                <button class="slds-button slds-m-right_small" title="Search">
+                    <lightning-icon icon-name="standard:search"></lightning-icon>
+                </button>
+                <button class="slds-button slds-m-right_small" title="Support">
+                    <lightning-icon icon-name="standard:email_chatter"></lightning-icon>
+                </button>
+                <template if:true={isUserMode}>
+                    <c-user-header-panel user-id={getUserId}></c-user-header-panel>
+                </template>
+                <template if:false={isUserMode}>
+                    <button class="slds-button slds-button_outline-brand" onclick={openAuthModal}>Sign Up</button>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

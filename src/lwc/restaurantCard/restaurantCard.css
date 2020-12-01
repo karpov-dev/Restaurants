@@ -1,0 +1,5 @@
+@import "c/styleClasses";
+
+.mouse-focus:hover {
+    transform: scale(1.03);
+}

@@ -1,0 +1,1 @@
+public class QS_QueryException extends Exception {}

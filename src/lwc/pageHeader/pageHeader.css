@@ -1,0 +1,6 @@
+@import 'c/styleClasses';
+
+.header {
+    width: 100%;
+    border-radius: 20px;
+}

@@ -1,0 +1,1 @@
+public with sharing class RS_RestException extends Exception {}

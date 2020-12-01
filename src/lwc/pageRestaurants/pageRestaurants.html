@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-m-around_xx-small">
+        <c-page-header user-id={getUserId}></c-page-header>
+    </div>
+
+    <div class="slds-is-absolute">
+        <div style="width: 500px;">
+            <c-restaurants-table></c-restaurants-table>
+        </div>
+        <div style="width: 100%" class="hide">
+            <c-restaurant-full-information ></c-restaurant-full-information>
+        </div>
+    </div>
+
+    <div class="map-position">
+        <c-google-map></c-google-map>
+    </div>
+</template>

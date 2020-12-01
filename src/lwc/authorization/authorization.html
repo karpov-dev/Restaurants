@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title={label.authorizationLabel} icon-name='standard:lead'>
+        <div class='slds-p-horizontal_medium'>
+            <lightning-input label={label.emailLabel}
+                             name='email'
+                             data-id='email'
+                             required='true'
+                             placeholder={label.emailPlaceholderLabel}
+                             onchange={valueHandler}>
+            </lightning-input>
+            <lightning-input label={label.passwordLabel}
+                             data-id="password"
+                             required="true"
+                             name="password"
+                             type="password"
+                             onchange={valueHandler}
+                             placeholder={label.passwordLabel}
+                             max-length="100"
+                             min-length="5">
+            </lightning-input>
+        </div>
+        <p slot='footer'>
+            <button class="slds-button slds-button_brand slds-button_stretch slds-m-bottom_x-small" onclick={signIn}
+                    disabled={singInButtonDisabled}>{label.signInLabel}
+            </button>
+            <slot name="additionalButton" class="slds-m-bottom_x-small"></slot>
+            <slot name="secondAdditionalButton" class="slds-m-bottom_x-small"></slot>
+        </p>
+    </lightning-card>
+</template>

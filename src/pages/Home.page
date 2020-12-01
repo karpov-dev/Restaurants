@@ -1,0 +1,22 @@
+<apex:page id="Home" showHeader="false" label="Table Rent">
+
+    <style>
+        body {
+            background-image: url(https://html5book.ru/wp-content/uploads/2015/06/background28.jpg);
+            background-repeat: repeat;
+        }
+    </style>
+
+    <apex:includeLightning />
+
+    <div id="lightning" />
+
+    <script>
+        $Lightning.use('c:ApplicationWindow', () => {
+            $Lightning.createComponent('c:application', {}, 'lightning', () => {
+
+            });
+        });
+    </script>
+
+</apex:page>

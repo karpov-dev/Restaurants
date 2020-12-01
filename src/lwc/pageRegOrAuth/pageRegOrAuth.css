@@ -1,0 +1,9 @@
+.main-container {
+    display: flex;
+    height: 800px;
+}
+
+.child-element {
+    margin: auto;
+    width: 500px;
+}

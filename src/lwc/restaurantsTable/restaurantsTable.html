@@ -1,0 +1,9 @@
+<template>
+    <div data-id="scrollDiv" class="slds-scrollable_y" style="height:20rem;" onscroll={tableOnScroll}>
+        <template for:each={restaurants} for:item="restaurant">
+            <div key={restaurant.Id} class="slds-m-around_medium">
+                <c-restaurant-card restaurant={restaurant}></c-restaurant-card>
+            </div>
+        </template>
+    </div>
+</template>
