@@ -1,10 +1,27 @@
 @import "c/styleClasses";
 
 .map-position {
-    position: absolute;
+    position: fixed;
     z-index: -100;
-    width: 100%;
+    width: 140%;
     height: 100%;
     top: 0;
     left: 0;
+}
+
+.header-position {
+    z-index: 100;
+    width: 100%;
+    top: 0;
+    height: 70px;
+}
+
+.full-info-position {
+    position: sticky;
+    top: 70px;
+}
+
+.grid-settings {
+    display: grid;
+    grid-template-columns: 1fr 2fr
 }

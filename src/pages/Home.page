@@ -9,14 +9,12 @@
 
     <apex:includeLightning />
 
-    <div id="lightning" />
+    <div id="lightning">
+    </div>
 
     <script>
         $Lightning.use('c:ApplicationWindow', () => {
-            $Lightning.createComponent('c:application', {}, 'lightning', () => {
-
-            });
-        });
+            $Lightning.createComponent('c:application', {}, 'lightning', () => {});});
     </script>
 
 </apex:page>

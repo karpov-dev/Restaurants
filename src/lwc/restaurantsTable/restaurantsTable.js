@@ -1,6 +1,6 @@
 import {LightningElement, api, track} from 'lwc';
 import {RestaurantsService} from "c/restaurantsService";
-import {DomService} from "c/domService";
+import {EventService} from "c/eventService";
 
 const fields = [
     'Id', 'Name', 'Address__c', 'Description__c',
@@ -11,33 +11,25 @@ const fields = [
 export default class RestaurantsTable extends LightningElement {
     @api filters;
     @track restaurants = [];
-    scrollDiv;
 
     constructor() {
         super();
         RestaurantsService.getRestaurants(null, fields, this);
-    }
-
-    renderedCallback() {
-        this.scrollDiv = DomService.getElementByDataId('scrollDiv', this);
+        EventService.addEventListner(window, 'scroll', this.documentOnscroll);
     }
 
     setRestaurants(result) {
         this.restaurants = result;
     }
 
-    tableOnScroll(event) {
-        const PIXELS_TO_START_DATA_LOAD = 5;
-        const div = this.scrollDiv;
+    documentOnscroll(event) {
+        const PIXELS_TO_LOAD_RECORDS = 10;
+        const docElement = document.documentElement;
 
-        if ((div.scrollHeight - div.clientHeight) - PIXELS_TO_START_DATA_LOAD >= div.scrollTop) {
+        if (docElement.scrollHeight - docElement.clientHeight <= docElement.scrollTop + PIXELS_TO_LOAD_RECORDS) {
             setTimeout(() => {
-                //alert('DATA LOAD')
+                console.log('LOAD DATA');
             }, 500);
         }
-
-        console.log(div.scrollHeight);
-        console.log(div.clientHeight);
-        console.log(div.scrollTop);
     }
 }

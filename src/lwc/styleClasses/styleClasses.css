@@ -19,3 +19,20 @@
 .border-radius-medium {
     border-radius: 15px;
 }
+
+.is-inline-block {
+    display: inline-block;
+}
+
+.max-size {
+    width: 100%;
+    height: 100%;
+}
+
+.max-height {
+    height: 100%;
+}
+
+.max-width {
+    width: 100%;
+}

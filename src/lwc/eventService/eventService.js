@@ -17,7 +17,7 @@ class EventService {
     }
 
     static showToastEvt(title, message, variant, sender) {
-        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.showToastEvt,  {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.showToastEvt, {
             title: title,
             message: message,
             variant: variant
@@ -49,7 +49,7 @@ class EventService {
     }
 
     static moreRestaurantInfoEvt(restaurantId, sender) {
-        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.moreRestaurant));
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.moreRestaurant, restaurantId));
     }
 
     static showOnMap(latitude, longitude, title, description, sender) {

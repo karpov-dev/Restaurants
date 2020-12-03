@@ -9,4 +9,13 @@ public without sharing class SC_RestaurantsService {
 
         return (List<Restaurant__c>) searcher.getRecords(searcher.soqlRequest);
     }
+
+    @AuraEnabled
+    public static Restaurant__c getRestaurantById(Id restaurantId, List<String> fields) {
+        if (fields == null || fields.isEmpty()) {
+            throw new SC_Exception('Fields == null or empty' + fields);
+        }
+
+        return MC_RestaurantManager.getRestaurantById(restaurantId, fields);
+    }
 }

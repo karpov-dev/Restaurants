@@ -1,24 +1,26 @@
 import {LightningElement, api} from 'lwc';
 import {EventService} from "c/eventService";
-import {DomService} from "c/domService";
+import {helper} from "./helper";
 
 export default class PageRestaurants extends LightningElement {
     @api userId;
-    googleMap;
+    @api currentRestaurant;
+    restaurantDescriptionDiv;
 
     constructor() {
         super();
-        EventService.addEventListner(this, EventService.EVENT_NAMES.showOnMap, this.setGeolocation);
+        helper.parent = this;
+        EventService.addEventListner(this, EventService.EVENT_NAMES.showOnMap, this.showOnMapHandler);
+        EventService.addEventListner(this, EventService.EVENT_NAMES.moreRestaurant, this.moreRestaurantHandler);
     }
 
-    renderedCallback() {
-        this.googleMap = DomService.getElementByTag('c-google-map', this);
-        this.scrollDiv = DomService.getElementByDataId('scrollDiv', this);
+    showOnMapHandler(event) {
+        helper.setGoogleMapMarker(event.detail);
     }
 
-    setGeolocation(event) {
-        const detail = event.detail;
-        this.googleMap.setMarker(detail.latitude, detail.longitude, detail.title, detail.description);
+    moreRestaurantHandler(event) {
+        helper.setMainRestaurantId(event.detail);
+        helper.changeDescriptionVisibility(event.detail);
     }
 
     get getUserId() {

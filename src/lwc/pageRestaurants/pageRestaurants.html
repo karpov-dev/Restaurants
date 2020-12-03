@@ -1,14 +1,17 @@
 <template>
-    <div class="slds-m-around_xx-small">
+    <div class="header-position"></div>
+    <div class="header-position slds-is-fixed slds-m-horizontal_x-small">
         <c-page-header user-id={getUserId}></c-page-header>
     </div>
 
-    <div class="slds-is-absolute">
-        <div style="width: 500px;">
+    <div class="grid-settings">
+        <div class="slds-m-around_x-small">
             <c-restaurants-table></c-restaurants-table>
         </div>
-        <div style="width: 100%" class="hide">
-            <c-restaurant-full-information ></c-restaurant-full-information>
+        <div class="slds-m-around_x-small">
+            <div class="full-info-position">
+                <c-restaurant-description></c-restaurant-description>
+            </div>
         </div>
     </div>
 

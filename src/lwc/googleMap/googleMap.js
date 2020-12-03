@@ -16,16 +16,21 @@ export default class GoogleMap extends LightningElement {
         },
     ];
 
-    @api setMarker(latitude, longitude, title, description) {
-        this.mapMarkers = [
-            {
-                location: {
-                    Latitude: latitude,
-                    Longitude: longitude
-                },
-                title: title,
-                description: description
-            }
-        ];
+    @api
+    setMapMarker(marker) {
+        if (marker && marker.latitude && marker.longitude) {
+            this.mapMarkers = [
+                {
+                    location: {
+                        Latitude: marker.latitude,
+                        Longitude: marker.longitude
+                    },
+                    title: marker.title,
+                    description: marker.description
+                }
+            ];
+        } else {
+            console.error('Can not set marker on map: ' + marker);
+        }
     }
 }
