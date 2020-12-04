@@ -1,11 +1,11 @@
 <template>
-    <c-authorization data-id="authorization">
+    <c-authorization>
         <div slot="additionalButton">
             <button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={showRegistration}>Sign Up</button>
         </div>
     </c-authorization>
 
-    <c-registration data-id="registration" class="slds-hide">
+    <c-registration>
         <div slot="additionalButton">
             <button class="slds-button slds-button_text-destructive slds-button_stretch" onclick={showAuthorization}>Cancel</button>
         </div>

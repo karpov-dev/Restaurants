@@ -1,9 +1,19 @@
 import {LightningElement, api} from 'lwc';
-import {DomService} from "c/domService";
+import {CssVisibilityService} from "c/cssVisibilityService";
+
+const SHOW_CLASS = 'show';
+const HIDE_CLASS = 'hide';
 
 export default class Spinner extends LightningElement {
+    cssVisibilityHelper;
+
+    constructor() {
+        super();
+        this.cssVisibilityHelper = new CssVisibilityService(this, SHOW_CLASS, HIDE_CLASS);
+    }
+
     @api showSpinner(spinnerState) {
-        if(!spinnerState) DomService.changeElementClass('spinner', 'hide', this);
-        else DomService.changeElementClass('spinner', 'show', this);
+        if (spinnerState) this.cssVisibilityHelper.show('spinner');
+        else this.cssVisibilityHelper.hide('spinner');
     }
 }

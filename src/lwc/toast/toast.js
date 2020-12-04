@@ -1,41 +1,41 @@
 import {LightningElement, api} from 'lwc';
+import {CssVisibilityService} from "c/cssVisibilityService";
 
-//TODO - Добавить Title
+const SHOW_CLASS_NAME = 'show-from-left';
+const HIDE_CLASS_NAME = 'hide-to-right';
+const DEFAULT_TIMEOUT = 3000;
 
 export default class MiscNotification extends LightningElement {
     @api title = 'Title';
     @api message = 'Message';
     @api variant = 'success';
-    @api autoCloseTime = 5000;
+    @api autoCloseTime = DEFAULT_TIMEOUT;
     @api autoClose;
     timerId;
+    cssVisibilityHelper;
 
     @api setData(title, message, variant, autoClose = true) {
         this.title = title
         this.message = message;
         this.variant = variant;
         this.autoClose = autoClose;
+        this.cssVisibilityHelper = new CssVisibilityService(this, SHOW_CLASS_NAME, HIDE_CLASS_NAME);
     }
 
     @api show() {
-        this.close();
-
-        const toastModel = this.template.querySelector('[data-id="toastModal"]');
-        toastModel.className = 'show';
-
+        this.hide();
+        this.cssVisibilityHelper.show('toast');
         if (this.autoClose) this.autoCloseToast();
     }
 
-    @api close() {
+    @api hide() {
         if (this.timerId) clearTimeout(this.timerId);
-
-        const toastModel = this.template.querySelector('[data-id="toastModal"]');
-        toastModel.className = 'hide';
+        this.cssVisibilityHelper.hide('toast');
     }
 
     autoCloseToast() {
         this.timerId = setTimeout(() => {
-             this.close();
+             this.hide();
         }, this.autoCloseTime);
     }
 

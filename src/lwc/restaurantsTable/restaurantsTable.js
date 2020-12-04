@@ -1,6 +1,7 @@
 import {LightningElement, api, track} from 'lwc';
 import {RestaurantsService} from "c/restaurantsService";
 import {EventService} from "c/eventService";
+import {FiltersService} from "c/filtersService";
 
 const fields = [
     'Id', 'Name', 'Address__c', 'Description__c',
@@ -9,8 +10,9 @@ const fields = [
 ];
 
 export default class RestaurantsTable extends LightningElement {
-    @api filters;
+    @api filters = [];
     @track restaurants = [];
+    loadData = false;
 
     constructor() {
         super();
@@ -23,13 +25,18 @@ export default class RestaurantsTable extends LightningElement {
     }
 
     documentOnscroll(event) {
-        const PIXELS_TO_LOAD_RECORDS = 10;
+        const PIXELS_TO_LOAD_RECORDS = 50;
         const docElement = document.documentElement;
 
         if (docElement.scrollHeight - docElement.clientHeight <= docElement.scrollTop + PIXELS_TO_LOAD_RECORDS) {
-            setTimeout(() => {
-                console.log('LOAD DATA');
-            }, 500);
+            if (!this.loadData) {
+                this.loadData = true;
+                setTimeout(() => {
+                    const offsetFilter = FiltersService.createFilter('string_type', 'OFFSET', '10', '');
+                    console.log(offsetFilter);
+                    this.loadData = false;
+                }, 1000);
+            }
         }
     }
 }

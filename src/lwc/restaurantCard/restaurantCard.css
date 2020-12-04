@@ -1,4 +1,4 @@
-@import "c/styleClasses";
+@import "c/cssClasses";
 
 .mouse-focus:hover {
     transform: scale(1.03);

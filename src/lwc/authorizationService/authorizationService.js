@@ -3,10 +3,11 @@ import createUser from '@salesforce/apex/SC_AuthenticationService.createContact'
 import emailIsAvailable from '@salesforce/apex/SC_AuthenticationService.emailIsAvailable';
 
 import {EventService} from "c/eventService";
+import {ErrorService} from "c/errorService";
 
 class AuthorizationService {
     static signIn(email, password, owner) {
-        if (!email || !password || !owner) {
+        if (!(email && password && owner)) {
             console.error('Invalid email, password or owner(==null)');
             return null;
         }
@@ -20,11 +21,11 @@ class AuthorizationService {
             .then(result => {
                 return result;
             })
-            .catch(error => this.sendServerErrorEvt(error, owner));
+            .catch(error => ErrorService.logError(error));
     }
 
     static signUp(user, owner) {
-        if (!user) {
+        if (!(user && owner)) {
             console.error('Invalid user');
             return null;
         }
@@ -33,11 +34,11 @@ class AuthorizationService {
             .then(result => {
                 return result;
             })
-            .catch(error => this.sendServerErrorEvt(error, owner));
+            .catch(error => ErrorService.logError(error));
     }
 
     static isAvailableEmail(email, owner) {
-        if (!email || !owner) {
+        if (!(email && owner)) {
             console.error('Invalid email or owner(==null)');
             return null;
         }
@@ -46,12 +47,7 @@ class AuthorizationService {
             .then(result => {
                 return result;
             })
-            .catch(error => this.sendServerErrorEvt(error, owner));
-    }
-
-    static sendServerErrorEvt(error, owner) {
-        console.log(error);
-        EventService.serverErrorEvt(owner)
+            .catch(error => ErrorService.logError(error));
     }
 }
 

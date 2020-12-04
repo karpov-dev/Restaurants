@@ -1,1 +1,10 @@
-@import 'c/styleClasses';
+@import "c/cssVisibility";
+@import "c/cssAnimations";
+
+.toast-position {
+    position:fixed;
+    top:1rem;
+    left:1rem;
+    right:1rem;
+    z-index: 10000;
+}

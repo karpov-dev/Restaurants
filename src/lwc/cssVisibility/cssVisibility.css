@@ -1,0 +1,37 @@
+@import "c/cssAnimations";
+
+.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show-scale {
+    opacity: 1;
+    visibility: visible;
+    animation-name: show-scale;
+}
+
+.hide-scale {
+    opacity: 0;
+    visibility: hidden;
+    top: -999999px;
+    animation-name: hide-scale;
+}
+
+.show-from-left {
+    opacity: 1;
+    visibility: visible;
+    animation-name: show-from-left;
+}
+
+.hide-to-right {
+    opacity: 0;
+    visibility: hidden;
+    top: -999999px;
+    animation-name: hide-from-left
+}

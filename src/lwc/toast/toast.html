@@ -1,5 +1,5 @@
 <template>
-    <div data-id="toastModal" style="position:fixed;top:1rem;left:1rem;right:1rem;z-index: 10000;" class="slds-hide">
+    <div data-id="toast" class="hide animation-slow toast-position">
         <div class="slds-notify_container slds-is-relative">
             <div class={mainDivClass} role="status">
                 <span class="slds-assistive-text">{variant}</span>
@@ -10,7 +10,7 @@
                     <h2 class="slds-text-heading_small ">{message}</h2>
                 </div>
                 <div class="slds-notify__close">
-                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={close}>
+                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={hide}>
                         <lightning-icon icon-name="utility:close" size="small" variant="inverse"> </lightning-icon>
                         <span class="slds-assistive-text">Close</span>
                     </button>

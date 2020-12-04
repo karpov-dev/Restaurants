@@ -1,0 +1,7 @@
+.shadow {
+    box-shadow: 7px 7px 15px rgba(0,0,0,0.5);
+}
+
+.border-radius-medium {
+    border-radius: 15px;
+}

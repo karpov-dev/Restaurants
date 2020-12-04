@@ -1,0 +1,57 @@
+.animation-slow {
+    transition: 1.5s;
+    animation-duration: 1.5s;
+}
+
+.animation-medium {
+    transition: 1s;
+    animation-duration: 1s;
+}
+
+.animation-fast {
+    transition: 0.55s;
+    animation-duration: 0.55s;
+}
+
+@keyframes show-scale {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes hide-scale {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+}
+
+@keyframes show-from-left {
+    from {
+        opacity: 0;
+        visibility: hidden;
+        margin-right: 100%;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+        margin-right: 0;
+    }
+}
+
+@keyframes hide-from-left {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+        margin-left: 100%;
+    }
+}

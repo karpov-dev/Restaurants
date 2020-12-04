@@ -4,6 +4,7 @@ import {validate} from "./validate";
 
 import {EventService} from "c/eventService";
 import {AuthorizationService} from "c/authorizationService";
+import {CssVisibilityService} from "c/cssVisibilityService";
 
 import authorizationLabel from "@salesforce/label/c.Authorization";
 import emailLabel from "@salesforce/label/c.Email";
@@ -14,6 +15,9 @@ import invalidLoginLabel from '@salesforce/label/c.Invalid_Login';
 import invalidLoginOrPasswordLabel from '@salesforce/label/c.Invalid_Login_Or_Password';
 import successLabel from '@salesforce/label/c.Success';
 import successLoginLabel from '@salesforce/label/c.Successful_login';
+
+const SHOW_CLASS = 'slds-show';
+const HIDE_CLASS = 'slds-hide';
 
 export default class Authorization extends LightningElement {
     label = {
@@ -26,6 +30,20 @@ export default class Authorization extends LightningElement {
         password: ''
     }
     singInButtonDisabled = true;
+    cssVisibilityHelper;
+
+    constructor() {
+        super();
+        this.cssVisibilityHelper = new CssVisibilityService(this, SHOW_CLASS, HIDE_CLASS);
+    }
+
+    @api show() {
+        this.cssVisibilityHelper.show('auth');
+    }
+
+    @api hide() {
+        this.cssVisibilityHelper.hide('auth');
+    }
 
     valueHandler(event) {
         validate.parsingInputs(event, this.user);

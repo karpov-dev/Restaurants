@@ -1,69 +1,71 @@
 <template>
-    <lightning-card title="Registration" icon-name="standard:employee_contact">
-        <div class="slds-p-horizontal_medium">
-            <lightning-input label="First Name"
-                             data-id="firstName"
-                             required="true"
-                             name="firstName"
-                             onchange={valueHandler}
-                             placeholder="Billie"
-                             max-length="100"
-                             min-length="3"></lightning-input>
-            <lightning-input label="Last Name"
-                             data-id="lastName"
-                             required="true"
-                             name="lastName"
-                             onchange={valueHandler}
-                             placeholder="Armstrong"
-                             max-length="100"
-                             min-length="3"></lightning-input>
-            <lightning-input label="User Name"
-                             data-id="userName"
-                             required="true"
-                             name="userName"
-                             value={user.userName}
-                             onchange={valueHandler}
-                             placeholder="Billie.Armstrong"
-                             max-length="200"
-                             min-length="6"></lightning-input>
-            <lightning-input label="Password"
-                             data-id="password"
-                             required="true"
-                             name="password"
-                             type="password"
-                             onchange={valueHandler}
-                             placeholder="Password"
-                             max-length="100"
-                             min-length="5"></lightning-input>
-            <lightning-input label="Repeat Password"
-                             data-id="repeatPassword"
-                             name="repeatPassword"
-                             type="password"
-                             onchange={valueHandler}
-                             required="true"
-                             placeholder="Repeat"
-                             max-length="100"
-                             min-length="5"></lightning-input>
-            <lightning-input label="Email"
-                             data-id="email"
-                             required="true"
-                             name="email"
-                             onchange={valueHandler}
-                             placeholder="Billie.Armstrong@gmail.com"></lightning-input>
-            <lightning-input label="Mobile Phone"
-                             name="mobilePhone"
-                             data-id="phone"
-                             onchange={valueHandler}
-                             placeholder="123456789"
-                             max-length="13"
-                             min-length=7></lightning-input>
-        </div>
-        <p slot="footer">
-            <button class="slds-button slds-button_brand slds-button_stretch slds-m-bottom_x-small"
-                    onclick={signUp}
-                    disabled={singUpButtonDisabled}>Sign Up</button>
-            <slot name="additionalButton" class="slds-m-bottom_x-small"></slot>
-            <slot name="secondAdditionalButton" class="slds-m-bottom_x-small"></slot>
-        </p>
-    </lightning-card>
+    <div data-id="registration" class="slds-hide">
+        <lightning-card title="Registration" icon-name="standard:employee_contact">
+            <div class="slds-p-horizontal_medium">
+                <lightning-input label="First Name"
+                                 data-id="firstName"
+                                 required="true"
+                                 name="firstName"
+                                 onchange={valueHandler}
+                                 placeholder="Billie"
+                                 max-length="100"
+                                 min-length="3"></lightning-input>
+                <lightning-input label="Last Name"
+                                 data-id="lastName"
+                                 required="true"
+                                 name="lastName"
+                                 onchange={valueHandler}
+                                 placeholder="Armstrong"
+                                 max-length="100"
+                                 min-length="3"></lightning-input>
+                <lightning-input label="User Name"
+                                 data-id="userName"
+                                 required="true"
+                                 name="userName"
+                                 value={user.userName}
+                                 onchange={valueHandler}
+                                 placeholder="Billie.Armstrong"
+                                 max-length="200"
+                                 min-length="6"></lightning-input>
+                <lightning-input label="Password"
+                                 data-id="password"
+                                 required="true"
+                                 name="password"
+                                 type="password"
+                                 onchange={valueHandler}
+                                 placeholder="Password"
+                                 max-length="100"
+                                 min-length="5"></lightning-input>
+                <lightning-input label="Repeat Password"
+                                 data-id="repeatPassword"
+                                 name="repeatPassword"
+                                 type="password"
+                                 onchange={valueHandler}
+                                 required="true"
+                                 placeholder="Repeat"
+                                 max-length="100"
+                                 min-length="5"></lightning-input>
+                <lightning-input label="Email"
+                                 data-id="email"
+                                 required="true"
+                                 name="email"
+                                 onchange={valueHandler}
+                                 placeholder="Billie.Armstrong@gmail.com"></lightning-input>
+                <lightning-input label="Mobile Phone"
+                                 name="mobilePhone"
+                                 data-id="phone"
+                                 onchange={valueHandler}
+                                 placeholder="123456789"
+                                 max-length="13"
+                                 min-length=7></lightning-input>
+            </div>
+            <p slot="footer">
+                <button class="slds-button slds-button_brand slds-button_stretch slds-m-bottom_x-small"
+                        onclick={signUp}
+                        disabled={singUpButtonDisabled}>Sign Up</button>
+                <slot name="additionalButton" class="slds-m-bottom_x-small"></slot>
+                <slot name="secondAdditionalButton" class="slds-m-bottom_x-small"></slot>
+            </p>
+        </lightning-card>
+    </div>
 </template>

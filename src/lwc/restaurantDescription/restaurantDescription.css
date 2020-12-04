@@ -1,1 +1,3 @@
-@import 'c/styleClasses';
+@import 'c/cssAnimations';
+@import "c/cssClasses";
+@import "c/cssVisibility";

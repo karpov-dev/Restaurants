@@ -1,4 +1,4 @@
-@import "c/styleClasses";
+@import "c/cssClasses";
 
 .map-position {
     position: fixed;

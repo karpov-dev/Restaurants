@@ -2,13 +2,23 @@ import {LightningElement} from 'lwc';
 import {DomService} from "c/domService";
 
 export default class AuthWithRegistration extends LightningElement {
+    authCmp;
+    regCmp;
+
+    renderedCallback() {
+        this.authCmp = DomService.getElementByTag('c-authorization', this);
+        this.regCmp = DomService.getElementByTag('c-registration', this);
+
+        this.authCmp.show();
+    }
+
     showRegistration() {
-        DomService.changeElementClass('authorization', 'slds-hide', this);
-        DomService.changeElementClass('registration', 'slds-show', this);
+        this.authCmp.hide();
+        this.regCmp.show();
     }
 
     showAuthorization() {
-        DomService.changeElementClass('authorization', 'slds-show', this);
-        DomService.changeElementClass('registration', 'slds-hide', this);
+        this.authCmp.show();
+        this.regCmp.hide();
     }
 }

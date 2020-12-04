@@ -1,12 +1,22 @@
 import {LightningElement, api} from 'lwc';
-import {DomService} from "c/domService";
+import {CssVisibilityService} from "c/cssVisibilityService";
+
+const SHOW_CLASS = 'slds-show';
+const HIDE_CLASS = 'slds-hide';
 
 export default class ModalWindow extends LightningElement {
+    cssVisibilityHelper;
+
+    constructor() {
+        super();
+        this.cssVisibilityHelper = new CssVisibilityService(this, SHOW_CLASS, HIDE_CLASS);
+    }
+
     @api show() {
-        DomService.changeElementClass('modal', 'slds-show', this);
+        this.cssVisibilityHelper.show('modal')
     }
 
     @api hide() {
-        DomService.changeElementClass('modal', 'slds-hide', this);
+        this.cssVisibilityHelper.hide('modal');
     }
 }

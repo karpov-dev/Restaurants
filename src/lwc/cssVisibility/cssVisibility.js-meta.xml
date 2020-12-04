@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>50.0</apiVersion>
-    <description>Page Reg Or Auth</description>
+    <description>Css Visibility</description>
     <isExposed>false</isExposed>
-    <masterLabel>Page Reg Or Auth</masterLabel>
+    <masterLabel>Css Visibility</masterLabel>
 </LightningComponentBundle>

@@ -1,12 +1,13 @@
-import {LightningElement, track} from 'lwc';
+import {LightningElement, track, api} from 'lwc';
 
 import {EventService} from "c/eventService";
-import {DomService} from "c/domService";
 import {AuthorizationService} from "c/authorizationService";
+import {CssVisibilityService} from "c/cssVisibilityService";
 
 import {validate} from "./validate";
 
-//TODO - очистить все поля после регистрации
+const SHOW_CLASS = 'slds-show';
+const HIDE_CLASS = 'slds-hide';
 
 export default class Registration extends LightningElement {
     @track user = {
@@ -19,6 +20,21 @@ export default class Registration extends LightningElement {
     };
     repeatPassword = '';
     singUpButtonDisabled = true;
+    visibilityHelper;
+
+    constructor() {
+        super();
+        this.visibilityHelper = new CssVisibilityService(this, SHOW_CLASS, HIDE_CLASS);
+
+    }
+
+    @api show() {
+        this.visibilityHelper.show('registration');
+    }
+
+    @api hide() {
+        this.visibilityHelper.hide('registration');
+    }
 
     valueHandler(event) {
         validate.parent = this;

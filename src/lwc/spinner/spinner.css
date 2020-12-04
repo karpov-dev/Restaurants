@@ -1,4 +1,5 @@
-@import 'c/styleClasses';
+@import 'c/cssVisibility';
+@import "c/cssAnimations";
 
 .container {
     display: flex;
