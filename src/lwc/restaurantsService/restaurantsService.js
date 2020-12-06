@@ -3,14 +3,14 @@ import getRestaurant from '@salesforce/apex/SC_RestaurantsService.getRestaurantB
 import {ErrorService} from "c/errorService";
 
 class RestaurantsService {
-    static getRestaurants(filters, fields, owner) {
-        if (!(fields && owner)) {
-            console.log('Fields or owner is empty');
+    static getRestaurants(filters, fields) {
+        if (!fields) {
+            console.log('Fields is empty');
             return null;
         }
 
         return getRestaurants({JSONData: JSON.stringify(filters), fields: fields})
-            .then(result => owner.setRestaurants(result))
+            .then(result => {return result})
             .catch(error => ErrorService.logError(error));
     }
 

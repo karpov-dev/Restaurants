@@ -3,11 +3,16 @@ public without sharing class SC_RestaurantsService {
     public static List<Restaurant__c> getRestaurantsByFilters(String JSONData, List<String> fields) {
         if (String.isBlank(JSONData)) return new List<Restaurant__c>();
 
-        List<QS_QueryFilter> filters = (List<QS_QueryFilter>) SC_Utility.deserialize(JSONData, QS_QueryFilter.class);
+        List<QS_QueryFilter> filters = (List<QS_QueryFilter>) SC_Utility.deserialize(JSONData, List<QS_QueryFilter>.class);
+        System.debug(LoggingLevel.INFO, 'Filters: ' + filters);
+
         QS_QuerySearcher searcher = new QS_QuerySearcher('Restaurant__c', fields, filters);
         searcher.generateSOQLString();
 
-        return (List<Restaurant__c>) searcher.getRecords(searcher.soqlRequest);
+        List<Restaurant__c> restaurants = (List<Restaurant__c>) searcher.getRecords(searcher.soqlRequest);
+        System.debug(LoggingLevel.INFO, 'Amount returned restaurants: ' + restaurants.size());
+
+        return restaurants;
     }
 
     @AuraEnabled

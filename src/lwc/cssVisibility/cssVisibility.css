@@ -1,13 +1,13 @@
 @import "c/cssAnimations";
 
 .show {
-    opacity: 1;
-    visibility: visible;
+    animation-name: simple-show;
+    animation-fill-mode: forwards;
 }
 
 .hide {
-    opacity: 0;
-    visibility: hidden;
+    animation-name: simple-hide;
+    animation-fill-mode: forwards;
 }
 
 .show-scale {

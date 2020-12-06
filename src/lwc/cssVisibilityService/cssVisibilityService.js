@@ -21,6 +21,7 @@ class CssVisibilityService {
             return false;
         }
 
+        DomService.removeClassFromElementByDataId(dataId, 'slds-hide', this.parent);
         DomService.removeClassFromElementByDataId(dataId, 'hide', this.parent);
         DomService.removeClassFromElementByDataId(dataId, this.hideClass, this.parent);
         DomService.addClassToElementByDataId(dataId, this.showClass, this.parent);

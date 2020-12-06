@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-card slds-p-around_xxx-small elements-grid">
+        <div class="slds-m-around_xxx-small">
+            <lightning-input
+                    title="Entity"
+                    label="Entity"
+                    value={name}
+                    disabled="true">
+            </lightning-input>
+        </div>
+        <div class="slds-m-around_xxx-small">
+            <lightning-combobox
+                    name="operatorInput"
+                    label="Operator"
+                    options={options}
+                    value={selectedOption}
+                    placeholder="Operator"
+                    onchange={valueHandler}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-m-around_xxx-small">
+            <lightning-input
+                    name="valueInput"
+                    title="Value"
+                    label="Value"
+                    type={variant}
+                    value={value}
+                    onchange={valueHandler}>
+            </lightning-input>
+        </div>
+    </div>
+</template>

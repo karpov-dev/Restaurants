@@ -1,42 +1,57 @@
-import {LightningElement, api, track} from 'lwc';
-import {RestaurantsService} from "c/restaurantsService";
-import {EventService} from "c/eventService";
-import {FiltersService} from "c/filtersService";
+import {LightningElement, track} from 'lwc';
 
-const fields = [
-    'Id', 'Name', 'Address__c', 'Description__c',
-    'Phone__c', 'Views__c', 'Geolocation__Latitude__s',
-    'Geolocation__Longitude__s'
-];
+import {EventService} from "c/eventService";
+import {Filters} from "c/filters";
+import {DomService} from "c/domService";
+import {helper} from "./helper";
+
+const FIELDS_TO_LOAD = ['Id', 'Name', 'Address__c', 'Description__c', 'Phone__c', 'Views__c', 'Geolocation__Latitude__s', 'Geolocation__Longitude__s'];
+const PIXELS_TO_LOAD_RECORDS = 100;
+const LOAD_LIMIT = 9;
 
 export default class RestaurantsTable extends LightningElement {
-    @api filters = [];
     @track restaurants = [];
-    loadData = false;
+    filtersHelper = new Filters();
+    messageCmp;
+
+    isLoadData = false;
+    isEndOfData = false;
+    isUpdateData = false;
+    loadOffset = 0;
 
     constructor() {
         super();
-        RestaurantsService.getRestaurants(null, fields, this);
-        EventService.addEventListner(window, 'scroll', this.documentOnscroll);
+        EventService.addEventListner(window, 'scroll', this.documentOnscroll(this, FIELDS_TO_LOAD));
+        EventService.addEventListner(this, EventService.EVENT_NAMES.filterElement, this.setFilter)
+
+        const limitFilter = Filters.createSpecifyFilter(Filters.OPERATORS.LIMIT, LOAD_LIMIT);
+        const offsetFilter = Filters.createSpecifyFilter(Filters.OPERATORS.OFFSET, this.loadOffset);
+        this.filtersHelper.insert(limitFilter);
+        this.filtersHelper.insert(offsetFilter);
+
+        helper.loadData(this.filtersHelper.getFilters, FIELDS_TO_LOAD, this);
     }
 
-    setRestaurants(result) {
-        this.restaurants = result;
+    renderedCallback() {
+        this.messageCmp = DomService.getElementByTag('c-message-card', this);
     }
 
-    documentOnscroll(event) {
-        const PIXELS_TO_LOAD_RECORDS = 50;
+    documentOnscroll = (parent, fields) => (event) => {
         const docElement = document.documentElement;
 
         if (docElement.scrollHeight - docElement.clientHeight <= docElement.scrollTop + PIXELS_TO_LOAD_RECORDS) {
-            if (!this.loadData) {
-                this.loadData = true;
-                setTimeout(() => {
-                    const offsetFilter = FiltersService.createFilter('string_type', 'OFFSET', '10', '');
-                    console.log(offsetFilter);
-                    this.loadData = false;
-                }, 1000);
-            }
+            helper.loadData(parent.filtersHelper.getFilters, fields, parent, false);
         }
+    }
+
+    setFilter(event) {
+        const filter = event.detail;
+        this.filtersHelper.upsert(filter);
+
+        if (filter.subtype === Filters.SUBTYPE.EXPRESSION) {
+            helper.refreshLoader(this);
+        }
+
+        helper.loadData(this.filtersHelper.getFilters, FIELDS_TO_LOAD, this, true);
     }
 }

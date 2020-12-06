@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-card slds-p-around_xx-small shadow animation-fast">
+        <div class="grid-setting">
+            <c-search-box type="string" field="Name" operator="contains"></c-search-box>
+
+            <div class="button-position">
+                <lightning-button-icon icon-name="standard:slider" onclick={showHideMoreFilters}></lightning-button-icon>
+            </div>
+        </div>
+
+        <div data-id="moreFilters" class="slds-hide animation-fast slds-is-relative" style="z-index: 1;">
+            <c-filter name="Phone" type="string" field="Phone__c" variant="tel"></c-filter>
+            <c-filter name="Views" type="data" field="Views__c" variant="number"></c-filter>
+            <button class="slds-button slds-button_text-destructive slds-button_stretch" onclick={clearFilters}>Clear All</button>
+        </div>
+    </div>
+</template>

@@ -1,8 +1,15 @@
 <template>
-    <div data-id="visibility" class="hide animation-fast">
+    <div data-id="visibility" class="slds-hide animation-fast">
         <lightning-card title={restaurant.Name} icon-name="standard:account" class="shadow border-radius-medium">
             <div slot="actions">
                 <lightning-button-icon icon-name="action:close" onclick={hide}></lightning-button-icon>
+            </div>
+            <div class="slds-scrollable_y" style="max-height: 800px;">
+                <lightning-card title="Description">
+                    <div class=slds-m-around_small>
+                        <lightning-formatted-rich-text value={restaurant.Description__c}></lightning-formatted-rich-text>
+                    </div>
+                </lightning-card>
             </div>
         </lightning-card>
     </div>

@@ -1,8 +1,5 @@
 export {EventService}
 
-import serverHasErrorLabel from '@salesforce/label/c.Server_has_Error';
-import serverHasErrorMessage from '@salesforce/label/c.Server_has_error_message';
-
 class EventService {
     static EVENT_NAMES = {
         showToastEvt: 'showToast',
@@ -13,7 +10,8 @@ class EventService {
         spinnerEvt: 'spinner',
         changePageEvt: 'changePage',
         moreRestaurant: 'moreRestaurantInfo',
-        showOnMap: 'showOnMap'
+        showOnMap: 'showOnMap',
+        filterElement: 'filterElement'
     }
 
     static showToastEvt(title, message, variant, sender) {
@@ -59,6 +57,10 @@ class EventService {
             title: title,
             description: description
         }));
+    }
+
+    static filterElement(filter, sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.filterElement, filter));
     }
 
     static getEvent(name, detail = null, bubbles = true, composed = true) {

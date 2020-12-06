@@ -1,6 +1,6 @@
 public class QS_SearchService {
     @AuraEnabled
-    public static List<String> getAvailableFilters(String type) {
+    public static List<String> getAvailableOperators(String type) {
         if (String.isBlank(type)) {
             throw new QS_QueryException('Empty type');
         }

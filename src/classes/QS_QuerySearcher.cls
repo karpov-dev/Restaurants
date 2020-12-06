@@ -75,6 +75,8 @@ public class QS_QuerySearcher {
         Map<String, QS_QueryFilter> specifyElements = new Map<String, QS_QueryFilter>();
         separateFilters(filters, expressions, specifyElements);
 
+        System.debug(specifyElements);
+
         if (!expressions.isEmpty()) {
             soqlRequest += QS_QueryConstants.WHERE_SOQL + ' ';
         }
@@ -88,15 +90,16 @@ public class QS_QuerySearcher {
                 if (operator == QS_QueryConstants.CONTAINS || operator == QS_QueryConstants.DOES_NOT_CONTAIN) {
                     value = '%' + value + '%';
                 }
+                value = '\'' + value + '\'';
                 if (operator == QS_QueryConstants.DOES_NOT_CONTAIN) {
                     soqlRequest += QS_QueryConstants.NOT_SOQL + ' ( ' + field + ' ' + QS_QueryConstants.LIKE_SOQL + ' ' + value + ' ) ';
-                    continue;
                 }
                 if (operator == QS_QueryConstants.CONTAINS) {
                     soqlRequest += field + QS_QueryConstants.OPERATORS_SOQL.get(operator) + value + ' ';
-                    continue;
                 }
-                soqlRequest += field + QS_QueryConstants.OPERATORS_SOQL.get(operator) + '\'' + value + '\' ';
+                if (operator == QS_QueryConstants.EQUAL) {
+                    soqlRequest += field + QS_QueryConstants.OPERATORS_SOQL.get(operator) + ' ' + value + ' ';
+                }
             }
             if (type == QS_QueryConstants.DATA_TYPE) {
                 soqlRequest += field + QS_QueryConstants.OPERATORS_SOQL.get(operator) + value;
@@ -107,7 +110,7 @@ public class QS_QuerySearcher {
             soqlRequest += QS_QueryConstants.AND_SOQL + ' ';
         }
 
-        soqlRequest = soqlRequest.removeEnd(QS_QueryConstants.AND_SOQL);
+        soqlRequest = soqlRequest.removeEnd(QS_QueryConstants.AND_SOQL + ' ');
         soqlWithoutLimits = soqlRequest;
 
         if (specifyElements.containsKey(QS_QueryConstants.LIMIT_SOQL)) {

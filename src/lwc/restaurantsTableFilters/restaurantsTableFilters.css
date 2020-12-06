@@ -1,0 +1,12 @@
+@import "c/cssClasses";
+@import "c/cssAnimations";
+@import "c/cssVisibility";
+
+.grid-setting {
+    display: grid;
+    grid-template-columns: 20fr 1fr
+}
+
+.button-position {
+    align-self: flex-end;
+}

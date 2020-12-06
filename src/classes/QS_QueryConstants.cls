@@ -1,8 +1,8 @@
 public with sharing class QS_QueryConstants {
     //SOQL searcher work modes
-    public static final String STRING_TYPE = 'string_type';
-    public static final String DATA_TYPE = 'data_type';
-    public static final String DATE_TYPE = 'date_type';
+    public static final String STRING_TYPE = 'string';
+    public static final String DATA_TYPE = 'data';
+    public static final String DATE_TYPE = 'date';
 
     //SOQL elements
     public static final String SELECT_SOQL = 'SELECT';
