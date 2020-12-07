@@ -1,0 +1,66 @@
+@import "c/cssVisibility";
+
+.arrow-2 {
+    cursor: pointer;
+    height: 120px;
+    width: 80px;
+    position: relative;
+    margin: 20px;
+    opacity: 0.3;
+}
+.arrow-2-top,
+.arrow-2-bottom {
+    background: #050303;
+    height: 10px;
+    left: -30px;
+    position: absolute;
+    top: 60px;
+    width: 100px;
+}
+.arrow-2-top {
+    top: 64px;
+}
+.arrow-2-top {
+    transform: rotate(45deg);
+    transform-origin: bottom right;
+}
+.arrow-2-bottom {
+    transform: rotate(-45deg);
+    transform-origin: top right;
+}
+.arrow-grid-background {
+    background: black;
+    opacity: 0;
+    z-index: 1;
+}
+.right-arrow-background {
+    grid-area: 1/3/4/auto;
+}
+.left-arrow-background {
+    grid-area: 1/1/4/auto;
+}
+.left-arrow-position {
+    grid-area: 2/1;
+}
+.right-arrow-position {
+    grid-area: 2/3;
+}
+.img-position {
+    grid-area: 1/1/4/4;
+}
+.grid-settings {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    max-height: 700px;
+}
+.img-settings {
+    width: 100%;
+    max-height: 700px;
+}
+.border-radius {
+    border-radius: 10px;
+}
+.next:hover {
+    opacity: 0.4;
+}

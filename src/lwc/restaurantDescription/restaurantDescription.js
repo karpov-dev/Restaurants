@@ -29,21 +29,29 @@ export default class RestaurantDescription extends LightningElement {
         }
 
         this.restaurantId = newId;
+        RestaurantsService.getRestaurantById(this.restaurantId, FIELDS, this);
+
+        const placesTable = DomService.getElementByTag('c-places-table', this);
+        placesTable.show(this.restaurantId);
     }
 
     @api show() {
         this.cssVisibilityHelper.show('visibility');
-
-        if (this.restaurantId){
-            RestaurantsService.getRestaurantById(this.restaurantId, FIELDS, this);
-        }
+        const gallery = DomService.getElementByTag('c-gallery', this);
+        gallery.show(this.restaurantId);
     }
 
     @api hide() {
         this.cssVisibilityHelper.hide('visibility');
+        const gallery = DomService.getElementByTag('c-gallery', this);
+        gallery.hide();
     }
 
     setRestaurant(result) {
         this.restaurant = result;
+    }
+
+    get getRestaurantId() {
+        return this.restaurantId;
     }
 }

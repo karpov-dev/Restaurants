@@ -1,8 +1,8 @@
 <template>
-    <div class="shadow border-radius-medium mouse-focus" onclick={restaurantOnClick}>
+    <div class="shadow border-radius-medium mouse-focus animation-fast" onclick={restaurantOnClick}>
         <lightning-card title={restaurant.Name} icon-name="standard:opportunity">
             <div slot="actions">
-                <button class="slds-button slds-button_outline-brand" onclick={showMoreInfo}>More</button>
+                <c-arrow-button onclick={showMoreInfo} button-text="More Info"></c-arrow-button>
             </div>
             <div class=slds-m-around_small>
                 <p>Phone: {restaurant.Phone__c}</p>

@@ -11,6 +11,7 @@
         <div data-id="moreFilters" class="slds-hide animation-fast slds-is-relative" style="z-index: 1;">
             <c-filter name="Phone" type="string" field="Phone__c" variant="tel"></c-filter>
             <c-filter name="Views" type="data" field="Views__c" variant="number"></c-filter>
+            <c-filter-order fields-for-order="Name Views__c"></c-filter-order>
             <button class="slds-button slds-button_text-destructive slds-button_stretch" onclick={clearFilters}>Clear All</button>
         </div>
     </div>

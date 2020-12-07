@@ -5,11 +5,28 @@
                 <lightning-button-icon icon-name="action:close" onclick={hide}></lightning-button-icon>
             </div>
             <div class="slds-scrollable_y" style="max-height: 800px;">
+                <lightning-card title="Photos">
+                    <div class="slds-m-around_small">
+                        <c-gallery></c-gallery>
+                    </div>
+                </lightning-card>
+
                 <lightning-card title="Description">
-                    <div class=slds-m-around_small>
+                    <div class="slds-m-around_small">
                         <lightning-formatted-rich-text value={restaurant.Description__c}></lightning-formatted-rich-text>
                     </div>
                 </lightning-card>
+
+                <lightning-card title="Contact Information">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr)">
+                        <c-display-box>Phone</c-display-box>
+                        <c-display-box>Address</c-display-box>
+                        <c-display-box>{restaurant.Phone__c}</c-display-box>
+                        <c-display-box>{restaurant.Address__c}</c-display-box>
+                    </div>
+                </lightning-card>
+
+                <c-places-table restaurant-id={getRestaurantId}></c-places-table>
             </div>
         </lightning-card>
     </div>

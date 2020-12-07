@@ -113,6 +113,9 @@ public class QS_QuerySearcher {
         soqlRequest = soqlRequest.removeEnd(QS_QueryConstants.AND_SOQL + ' ');
         soqlWithoutLimits = soqlRequest;
 
+        if (specifyElements.containsKey(QS_QueryConstants.ORDER_BY)) {
+            soqlRequest += ' ' + QS_QueryConstants.ORDER_BY + ' ' + specifyElements.get(QS_QueryConstants.ORDER_BY).value;
+        }
         if (specifyElements.containsKey(QS_QueryConstants.LIMIT_SOQL)) {
             soqlRequest += ' ' + QS_QueryConstants.LIMIT_SOQL + ' ' + specifyElements.get(QS_QueryConstants.LIMIT_SOQL).value;
         }

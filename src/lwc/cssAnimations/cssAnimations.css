@@ -9,8 +9,8 @@
 }
 
 .animation-fast {
-    transition: 0.35s;
-    animation-duration: 0.35s;
+    transition: 0.55s;
+    animation-duration: 0.55s;
 }
 
 @keyframes simple-show {

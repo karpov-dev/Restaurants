@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Available places">
+        <div slot="actions">
+            <lightning-button-icon icon-name="standard:slider" onclick={showHideMoreFilters}></lightning-button-icon>
+        </div>
+        <div class="slds-m-around_small">
+            <c-places-filters></c-places-filters>
+        </div>
+        <div class="slds-m-around_small">
+            <template for:each={places} for:item="place">
+                <div key={place.Id} class="slds-m-bottom_small shadow-low scale-transform animation-fast">
+                    <c-place-card place={place}></c-place-card>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

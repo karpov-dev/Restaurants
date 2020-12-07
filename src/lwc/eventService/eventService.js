@@ -64,7 +64,7 @@ class EventService {
     }
 
     static getEvent(name, detail = null, bubbles = true, composed = true) {
-        return new CustomEvent(name, {bubbles: bubbles, composed: composed, detail: detail});
+        return new CustomEvent(name, {bubbles: bubbles, composed: composed, detail: detail, cancelable:true});
     }
 
     static addEventListner(owner, eventName, eventHandler) {

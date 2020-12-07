@@ -10,6 +10,7 @@ public with sharing class QS_QueryConstants {
     public static final String WHERE_SOQL = 'WHERE';
     public static final String LIMIT_SOQL = 'LIMIT';
     public static final String OFFSET_SOQL = 'OFFSET';
+    public static final String ORDER_BY = 'ORDER BY';
     public static final String AND_SOQL = 'AND';
     public static final String NOT_SOQL = 'NOT';
     public static final String LIKE_SOQL = 'LIKE';

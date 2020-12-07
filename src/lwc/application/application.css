@@ -1,1 +1,6 @@
 @import 'c/cssClasses';
+
+.main-position {
+    display: grid;
+    grid-template-columns: 2fr 10fr 2fr
+}

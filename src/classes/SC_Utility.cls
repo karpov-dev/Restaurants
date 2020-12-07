@@ -12,4 +12,17 @@ public without sharing class SC_Utility {
 
         return result;
     }
+
+    public static List<Id> getIds(List<SObject> objs) {
+        if (objs == null || objs.isEmpty()) return new List<Id>();
+
+        List<Id> ids = new List<Id>();
+        for (SObject obj : objs) {
+            if (obj == null || String.isBlank(obj.Id)) continue;
+
+            ids.add(obj.Id);
+        }
+
+        return ids;
+    }
 }

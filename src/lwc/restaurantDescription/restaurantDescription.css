@@ -1,3 +1,8 @@
 @import 'c/cssAnimations';
 @import "c/cssClasses";
 @import "c/cssVisibility";
+
+.center-position {
+    text-align: center;
+    background: #ffffff;
+}

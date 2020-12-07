@@ -182,6 +182,7 @@ class Filters {
         NOT_EXIST: 'not exist',
         LIMIT: 'LIMIT',
         OFFSET: 'OFFSET',
+        ORDER_BY: 'ORDER BY',
         NONE: 'none'
     }
 }

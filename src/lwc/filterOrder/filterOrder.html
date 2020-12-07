@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-card slds-p-around_xxx-small elements-grid">
+        <div class="slds-m-around_xxx-small">
+            <lightning-input
+                    title="Order by"
+                    label="Order by"
+                    value="Order by"
+                    disabled="true">
+            </lightning-input>
+        </div>
+        <div class="slds-m-around_xxx-small">
+            <lightning-combobox
+                    name="operatorInput"
+                    label="Field"
+                    options={fieldOptions}
+                    value={selectedFieldOption}
+                    placeholder="Field"
+                    onchange={valueHandler}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-m-around_xxx-small">
+            <lightning-combobox
+                    name="operatorInput"
+                    label="Up or Down"
+                    options={upOrDown}
+                    value={selectedDirection}
+                    placeholder="Up or Down"
+                    onchange={valueHandler}>
+            </lightning-combobox>
+        </div>
+    </div>
+</template>

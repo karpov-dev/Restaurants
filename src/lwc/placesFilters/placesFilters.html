@@ -1,0 +1,11 @@
+<template>
+    <div data-id="filters" class="slds-hide slds-card slds-p-around_xx-small shadow animation-fast">
+        <c-search-box type="string" field="Name" operator="contains"></c-search-box>
+
+        <div class="animation-fast slds-is-relative" style="z-index: 1;">
+            <c-filter name="Price" type="data" field="Price__c" variant="number"></c-filter>
+            <c-filter name="Conveniences" type="string" field="Conveniences__c" variant="text"></c-filter>
+            <button class="slds-button slds-button_text-destructive slds-button_stretch" onclick={clearFilters}>Clear All</button>
+        </div>
+    </div>
+</template>

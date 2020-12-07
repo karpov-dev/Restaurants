@@ -1,0 +1,33 @@
+<template>
+    <div data-id='gallery' class="slds-show">
+        <div class="grid-settings">
+
+            <div style="grid-area: 2/2; align-self: center; text-align: center;">
+                <c-spinner-v-2></c-spinner-v-2>
+            </div>
+
+            <div data-id="arrow" class="slds-hide arrow-grid-background left-arrow-background border-radius next animation-medium"
+                 onclick={previousImg}></div>
+            <div data-id="arrow" class="slds-hide left-arrow-position">
+                <div class="arrow-2" style="transform: scale(-1, 1)">
+                    <div class="arrow-2-top"></div>
+                    <div class="arrow-2-bottom"></div>
+                </div>
+            </div>
+
+            <div class="img-position">
+                <img src={currentImg} alt="Test" class="img-settings border-radius" onload={hideDataLoadSpinner}>
+            </div>
+
+            <div data-id="arrow" class="slds-hide arrow-grid-background right-arrow-background border-radius next animation-fast"
+                 onclick={nextImg}></div>
+            <div data-id="arrow" class="slds-hide right-arrow-position">
+                <div class="arrow-2">
+                    <div class="arrow-2-top"></div>
+                    <div class="arrow-2-bottom"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

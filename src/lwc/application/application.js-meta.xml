@@ -2,6 +2,10 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>50.0</apiVersion>
     <description>Application</description>
-    <isExposed>false</isExposed>
-    <masterLabel>Application</masterLabel>
+    <isExposed>true</isExposed>
+    <masterLabel>Hotel Rent Site</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
 </LightningComponentBundle>

@@ -22,12 +22,14 @@ export default class RestaurantsTable extends LightningElement {
     constructor() {
         super();
         EventService.addEventListner(window, 'scroll', this.documentOnscroll(this, FIELDS_TO_LOAD));
-        EventService.addEventListner(this, EventService.EVENT_NAMES.filterElement, this.setFilter)
+        EventService.addEventListner(this, EventService.EVENT_NAMES.filterElement, this.setFilter);
 
+        const orderByNameFilter = Filters.createSpecifyFilter(Filters.OPERATORS.ORDER_BY, 'Name');
         const limitFilter = Filters.createSpecifyFilter(Filters.OPERATORS.LIMIT, LOAD_LIMIT);
         const offsetFilter = Filters.createSpecifyFilter(Filters.OPERATORS.OFFSET, this.loadOffset);
         this.filtersHelper.insert(limitFilter);
         this.filtersHelper.insert(offsetFilter);
+        this.filtersHelper.insert(orderByNameFilter);
 
         helper.loadData(this.filtersHelper.getFilters, FIELDS_TO_LOAD, this);
     }
@@ -45,6 +47,7 @@ export default class RestaurantsTable extends LightningElement {
     }
 
     setFilter(event) {
+        event.preventDefault();
         const filter = event.detail;
         this.filtersHelper.upsert(filter);
 

@@ -1,7 +1,15 @@
 .shadow {
     box-shadow: 7px 7px 15px rgba(0,0,0,0.5);
 }
+.shadow-low {
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+}
 
 .border-radius-medium {
     border-radius: 15px;
+}
+
+.scale-transform:hover {
+    transform: scale(1.03);
+    box-shadow: 7px 7px 15px rgba(0,0,0,0.5);
 }

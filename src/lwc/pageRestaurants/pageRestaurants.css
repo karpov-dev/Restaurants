@@ -1,12 +1,13 @@
 @import "c/cssClasses";
 
 .map-position {
+    overflow: hidden;
     position: fixed;
     z-index: -100;
     width: 140%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    height: 115%;
+    top: -100px;
+    left: -100px;
 }
 
 .header-position {
@@ -14,6 +15,7 @@
     width: 100%;
     top: 0;
     height: 70px;
+    position: sticky;
 }
 
 .full-info-position {
