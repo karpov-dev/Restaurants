@@ -20,13 +20,4 @@ export default class PlacesFilters extends LightningElement {
     @api hide() {
         this.cssVisibilityHelper.hide('filters');
     }
-
-    clearFilters(event) {
-        const filterCmps = DomService.getAllElementsByTag('c-filter', this);
-        if (!filterCmps) return false;
-
-        for (let i = 0; i < filterCmps.length; i++) {
-            filterCmps[i].clear();
-        }
-    }
 }

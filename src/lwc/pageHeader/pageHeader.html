@@ -1,17 +1,7 @@
 <template>
-    <c-modal-window>
-        <p slot="header">Authorization</p>
-        <div slot="mainSpace">
-            <c-auth-with-registration onlogin={closeAuthModal}></c-auth-with-registration>
-        </div>
-    </c-modal-window>
-
     <div class="border-radius-medium shadow">
         <lightning-card title="Restaurant Rent" icon-name="standard:lead_list">
             <div slot="actions">
-                <button class="slds-button slds-m-right_small" title="Search">
-                    <lightning-icon icon-name="standard:search"></lightning-icon>
-                </button>
                 <button class="slds-button slds-m-right_small" title="Support">
                     <lightning-icon icon-name="standard:email_chatter"></lightning-icon>
                 </button>

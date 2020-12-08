@@ -26,6 +26,17 @@ public without sharing class MC_ContactManager {
         }
     }
 
+    public static Contact getContactById(Id contactId, List<String> fieldsToReturn) {
+        if (String.isBlank(contactId) || fieldsToReturn == null || fieldsToReturn.isEmpty()) {
+            throw new MC_Exception('Can not return contact. Contact Id or fields to return is empty');
+        }
+
+        List<Contact> contacts = (List<Contact>) Database.query(SC_Utility.getSoqlRequest(contactId, 'Contact', fieldsToReturn));
+
+        if (contacts.isEmpty()) return null;
+        return contacts[0];
+    }
+
     public static Contact getContactByEmailAndPassword(String email, String password) {
         if (String.isBlank(email) || String.isBlank(password)) return new Contact();
 

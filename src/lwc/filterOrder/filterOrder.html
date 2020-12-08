@@ -2,6 +2,7 @@
     <div class="slds-card slds-p-around_xxx-small elements-grid">
         <div class="slds-m-around_xxx-small">
             <lightning-input
+                    name="OrderBy"
                     title="Order by"
                     label="Order by"
                     value="Order by"
@@ -10,21 +11,21 @@
         </div>
         <div class="slds-m-around_xxx-small">
             <lightning-combobox
-                    name="operatorInput"
+                    name="orderFieldInput"
                     label="Field"
                     options={fieldOptions}
                     value={selectedFieldOption}
-                    placeholder="Field"
+                    placeholder="Select Field"
                     onchange={valueHandler}>
             </lightning-combobox>
         </div>
         <div class="slds-m-around_xxx-small">
             <lightning-combobox
-                    name="operatorInput"
-                    label="Up or Down"
+                    name="orderDirection"
+                    label="Direction"
                     options={upOrDown}
                     value={selectedDirection}
-                    placeholder="Up or Down"
+                    placeholder="Direction"
                     onchange={valueHandler}>
             </lightning-combobox>
         </div>

@@ -1,21 +1,34 @@
-import {LightningElement, api} from 'lwc';
+import {LightningElement, api, track} from 'lwc';
 import getPlacesApex from '@salesforce/apex/SC_ProductService.getProductsByFilters';
 import {ErrorService} from "c/errorService";
 import {Filters} from "c/filters";
 import {DomService} from "c/domService";
 import {EventService} from "c/eventService";
+import {helper} from "./helper";
 
 const FIELDS = ['Id', 'Name', 'Conveniences__c', 'Price__c', 'Restaurant__c'];
+const PIXELS_TO_LOAD = 20;
+const LOAD_LIMIT = 10;
 
 export default class PlacesTable extends LightningElement {
     @api restaurantId;
-    places = [];
+    @track places = [];
     filtersHelper = new Filters();
+    messageCmp
+
     isVisibleFilters = false;
+    isLoadData = false;
+    isEndOfData = false;
+    isUpdateData = false;
 
     constructor() {
         super();
         EventService.addEventListner(this, EventService.EVENT_NAMES.filterElement, this.setFilter);
+        this.setupFilters();
+    }
+
+    renderedCallback() {
+        this.messageCmp = DomService.getElementByTag('c-message-card', this);
     }
 
     @api show(restaurantId) {
@@ -25,19 +38,8 @@ export default class PlacesTable extends LightningElement {
         }
         this.restaurantId = restaurantId;
 
-        this.filtersSetup()
-        this.loadData();
-    }
-
-    loadData() {
-        getPlacesApex({JSONData: JSON.stringify(this.filtersHelper.getFilters), fields: FIELDS})
-            .then(result => {this.places = this.parsingConveniences(result);})
-            .catch(error => ErrorService.logError(error));
-    }
-
-    filtersSetup() {
-        const restaurantFilter = Filters.create(Filters.TYPES.STRING_TYPE, 'Restaurant__c', this.restaurantId, Filters.OPERATORS.EQUAL, Filters.SUBTYPE.EXPRESSION);
-        this.filtersHelper.upsert(restaurantFilter);
+        this.setupFilters();
+        helper.loadData(this.filtersHelper.getFilters, FIELDS, this, true);
     }
 
     showHideMoreFilters(event) {
@@ -49,22 +51,6 @@ export default class PlacesTable extends LightningElement {
         this.isVisibleFilters = !this.isVisibleFilters;
     }
 
-    parsingConveniences(places) {
-        if (!places) {
-            console.error('Can not parsing Conveniences. Places %s', places);
-            return null;
-        }
-
-        for (let i = 0; i < places.length; i++) {
-            if (!places[i].Conveniences__c) {
-                places[i].Conveniences__c = 'Standard';
-            }
-            places[i].Conveniences__c = places[i].Conveniences__c.split(';');
-        }
-
-        return places;
-    }
-
     setFilter(event) {
         const filter = event.detail;
         this.filtersHelper.upsert(filter);
@@ -73,6 +59,12 @@ export default class PlacesTable extends LightningElement {
             helper.refreshLoader(this);
         }
 
-        helper.loadData(this.filtersHelper.getFilters, FIELDS_TO_LOAD, this, true);
+        helper.loadData(this.filtersHelper.getFilters, FIELDS, this, true);
+        event.preventDefault();
+    }
+
+    setupFilters() {
+        const restaurantFilter = Filters.create(Filters.TYPES.STRING_TYPE, 'Restaurant__c', this.restaurantId, Filters.OPERATORS.EQUAL, Filters.SUBTYPE.EXPRESSION);
+        this.filtersHelper.upsert(restaurantFilter);
     }
 }

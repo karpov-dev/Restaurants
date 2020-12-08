@@ -1,12 +1,7 @@
 <template>
-    <lightning-card title={place.Name} icon-name="standard:contract_line_item">
+    <lightning-card title={place.Name} icon-name="standard:contract_line_item" style="display: grid;">
         <div slot="actions">
-            <button class="slds-button slds-button_outline-brand">{place.Price__c} BYN</button>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(6, 1fr)">
-            <template for:each={place.Conveniences__c} for:item="onePlace">
-                <c-display-box key={onePlace.Id}>{onePlace}</c-display-box>
-            </template>
+            <button class="slds-button slds-button_outline-brand" onclick={fireRentPlaceEvent}>{place.Price__c} BYN</button>
         </div>
     </lightning-card>
 </template>

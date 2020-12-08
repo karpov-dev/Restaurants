@@ -4,18 +4,9 @@ import {EventService} from "c/eventService";
 
 export default class PageHeader extends LightningElement {
     @api userId;
-    modalWindow;
-
-    renderedCallback() {
-        this.modalWindow = DomService.getElementByTag('c-modal-window', this);
-    }
 
     openAuthModal() {
-        this.modalWindow.show();
-    }
-
-    closeAuthModal() {
-        this.modalWindow.hide();
+        EventService.openLoginModal(this);
     }
 
     get isUserMode() {

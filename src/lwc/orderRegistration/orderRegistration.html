@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Order Registration" icon-name="standard:buyer_account">
+        <div class="slds-m-around_small shadow">
+            <lightning-card title="Check Personal Information" icon-name="standard:lead">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr)">
+                    <c-display-box>Name:</c-display-box>
+                    <c-display-box>Phone:</c-display-box>
+                    <c-display-box>Email:</c-display-box>
+                    <c-display-box>{user.LastName} {user.FirstName}</c-display-box>
+                    <c-display-box>{user.Phone}</c-display-box>
+                    <c-display-box>{user.Email}</c-display-box>
+                </div>
+            </lightning-card>
+        </div>
+
+        <div class="slds-m-around_small shadow">
+            <lightning-card title="Check Restaurant Information" icon-name="standard:home">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr)">
+                    <c-display-box>Restaurant Name:</c-display-box>
+                    <c-display-box>Restaurant Phone:</c-display-box>
+                    <c-display-box>Restaurant Address:</c-display-box>
+                    <c-display-box>{restaurant.Name}</c-display-box>
+                    <c-display-box>{restaurant.Phone__c}</c-display-box>
+                    <c-display-box>{restaurant.Address__c}</c-display-box>
+                </div>
+            </lightning-card>
+        </div>
+
+        <div class="slds-m-around_small shadow">
+            <lightning-card title="Check Table Information" icon-name="standard:record">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr)">
+                    <c-display-box>Table Number:</c-display-box>
+                    <c-display-box>Table Price:</c-display-box>
+                    <c-display-box>{product.Name}</c-display-box>
+                    <c-display-box>{product.Price__c} BYN</c-display-box>
+                </div>
+            </lightning-card>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <button class="slds-button slds-button_outline-brand slds-button_stretch">Create Order</button>
+        </div>
+
+    </lightning-card>
+</template>

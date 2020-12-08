@@ -38,8 +38,6 @@ public without sharing class SC_AuthenticationService {
         return true;
     }
 
-
-
     public class RegistrationWrapper {
         public String firstName;
         public String lastName;

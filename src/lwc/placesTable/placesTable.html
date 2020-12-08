@@ -3,15 +3,19 @@
         <div slot="actions">
             <lightning-button-icon icon-name="standard:slider" onclick={showHideMoreFilters}></lightning-button-icon>
         </div>
-        <div class="slds-m-around_small">
+
+        <div class="slds-m-around_small slds-m-bottom_medium slds-is-relative" style="z-index: 1;">
             <c-places-filters></c-places-filters>
         </div>
-        <div class="slds-m-around_small">
-            <template for:each={places} for:item="place">
-                <div key={place.Id} class="slds-m-bottom_small shadow-low scale-transform animation-fast">
-                    <c-place-card place={place}></c-place-card>
-                </div>
-            </template>
+
+        <template for:each={places} for:item="place">
+            <div key={place.Id} class="slds-m-bottom_small slds-m-horizontal_large shadow-low scale-transform animation-fast">
+                <c-place-card place={place}></c-place-card>
+            </div>
+        </template>
+        <div class="slds-m-bottom_small slds-m-horizontal_large">
+            <c-message-card style="display: grid;"></c-message-card>
         </div>
+
     </lightning-card>
 </template>

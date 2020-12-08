@@ -34,7 +34,6 @@ export default class MainComponentManager extends LightningElement {
 
     loginUser(event) {
         this.userId = event.detail;
-        helper.changePage('restaurants');
     }
 
     logoutUser(event) {

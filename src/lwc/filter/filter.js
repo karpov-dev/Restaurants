@@ -1,6 +1,9 @@
 import {LightningElement, api, track} from 'lwc';
 import {Filters} from "c/filters";
 import {EventService} from "c/eventService";
+import {Utility} from "c/utility";
+
+const DEFAULT_OPERATOR = Filters.OPERATORS.NONE;
 
 export default class Filter extends LightningElement {
     @api name;
@@ -11,27 +14,14 @@ export default class Filter extends LightningElement {
     operator;
 
     @track options = []
-    @track selectedOption;
+    @track selectedOption = DEFAULT_OPERATOR;
 
     connectedCallback() {
-        Filters.getAvailableOperators(this.type)
-            .then(result => {
-                this.options = this.listToOptions(result)
-            });
-    }
-
-    @api clear() {
-        this.value = null;
-        this.operator = null;
-        this.selectedOption = null;
-
-        this.fireFilter();
+        Filters.getAvailableOperators(this.type).then(result => {this.options = this.listToOptions(result)});
     }
 
     valueHandler(event) {
         this.parsingInput(event);
-        if (!(this.type && this.field && this.operator)) return false;
-
         this.fireFilter();
     }
 
@@ -43,14 +33,10 @@ export default class Filter extends LightningElement {
     listToOptions(stringList) {
         if (!stringList) {
             console.error('Can not create options from list. List: %s', stringList);
+            return null;
         }
 
-        const options = []
-        for (let i = 0; i < stringList.length; i++) {
-            options.push({label: stringList[i], value: stringList[i]});
-        }
-
-        return options;
+        return Utility.toOptions(stringList);
     }
 
     parsingInput(event) {

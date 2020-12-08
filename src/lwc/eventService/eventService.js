@@ -11,7 +11,12 @@ class EventService {
         changePageEvt: 'changePage',
         moreRestaurant: 'moreRestaurantInfo',
         showOnMap: 'showOnMap',
-        filterElement: 'filterElement'
+        filterElement: 'filterElement',
+        lazyBoxEvt: 'lazyBoxEvt',
+        rentPlaceEvt: 'rentPlace',
+        openLoginModal: 'openLoginModal',
+        nextQueueEvt: 'nextQueue',
+        manualCloseModal: 'manualCloseModal'
     }
 
     static showToastEvt(title, message, variant, sender) {
@@ -61,6 +66,26 @@ class EventService {
 
     static filterElement(filter, sender) {
         sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.filterElement, filter));
+    }
+
+    static lazyBoxEvt(sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.lazyBoxEvt));
+    }
+
+    static rentPlaceEvt(placeId, sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.rentPlaceEvt, placeId));
+    }
+
+    static openLoginModal(sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.openLoginModal));
+    }
+
+    static closeModal(sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.manualCloseModal));
+    }
+
+    static nextQueueEvt(sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.nextQueueEvt));
     }
 
     static getEvent(name, detail = null, bubbles = true, composed = true) {

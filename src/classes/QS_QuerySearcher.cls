@@ -51,11 +51,10 @@ public class QS_QuerySearcher {
         this.filters.clear();
 
         for (QS_QueryFilter filter : filters) {
-            Boolean isNull = filter == null;
             Boolean isValueBlank = String.isBlank(filter.value);
             Boolean isNoneOperator = filter.operator == QS_QueryConstants.NONE;
 
-            if (isNull || isValueBlank || isNoneOperator) continue;
+            if (isValueBlank || isNoneOperator) continue;
             this.filters.add(filter);
         }
 
@@ -115,6 +114,10 @@ public class QS_QuerySearcher {
 
         if (specifyElements.containsKey(QS_QueryConstants.ORDER_BY)) {
             soqlRequest += ' ' + QS_QueryConstants.ORDER_BY + ' ' + specifyElements.get(QS_QueryConstants.ORDER_BY).value;
+            QS_QueryFilter element = specifyElements.get(QS_QueryConstants.ORDER_BY);
+            if (!String.isBlank(element.additionalOperator)) {
+                soqlRequest += ' ' + element.additionalOperator;
+            }
         }
         if (specifyElements.containsKey(QS_QueryConstants.LIMIT_SOQL)) {
             soqlRequest += ' ' + QS_QueryConstants.LIMIT_SOQL + ' ' + specifyElements.get(QS_QueryConstants.LIMIT_SOQL).value;

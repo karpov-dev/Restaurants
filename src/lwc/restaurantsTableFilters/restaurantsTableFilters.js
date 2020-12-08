@@ -1,4 +1,4 @@
-import {LightningElement} from 'lwc';
+import {LightningElement, api} from 'lwc';
 import {CssVisibilityService} from "c/cssVisibilityService";
 import {DomService} from "c/domService";
 
@@ -8,6 +8,10 @@ const HIDE_CLASS = 'hide';
 export default class RestaurantsTableFilters extends LightningElement {
     cssVisibilityHelper;
     isVisibleMoreFilters = false;
+
+    get getDirection() {
+        return this.direction;
+    }
 
     constructor() {
         super();
@@ -19,14 +23,5 @@ export default class RestaurantsTableFilters extends LightningElement {
         else this.cssVisibilityHelper.show('moreFilters');
 
         this.isVisibleMoreFilters = !this.isVisibleMoreFilters;
-    }
-
-    clearFilters(event) {
-        const filterCmps = DomService.getAllElementsByTag('c-filter', this);
-        if (!filterCmps) return false;
-
-        for (let i = 0; i < filterCmps.length; i++) {
-            filterCmps[i].clear();
-        }
     }
 }

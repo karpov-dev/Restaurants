@@ -4,16 +4,9 @@ public without sharing class MC_RestaurantManager {
             throw new MC_Exception('Restaurant ID or fields list is empty: ' + restaurantId + ' : ' + fieldsToReturn);
         }
 
-        String soqlRequest = 'SELECT ' + String.join(fieldsToReturn, ',') + ' ' +
-                             'FROM Restaurant__c ' +
-                             'WHERE Id = ' + '\'' + restaurantId + '\'';
-        List<Restaurant__c> result = (List<Restaurant__c>) Database.query(soqlRequest);
+        List<Restaurant__c> result = (List<Restaurant__c>) Database.query(SC_Utility.getSoqlRequest(restaurantId, 'Restaurant__c', fieldsToReturn));
 
-        if (!result.isEmpty()) {
-            return result[0];
-        }
-        else {
-            return null;
-        }
+        if (!result.isEmpty()) return result[0];
+        return null;
     }
 }

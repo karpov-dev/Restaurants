@@ -1,10 +1,10 @@
 import {LightningElement, api} from 'lwc';
+import {EventService} from "c/eventService";
 
 export default class PlaceCard extends LightningElement {
-    @api place = [];
+    @api place;
 
-    constructor() {
-        super();
-        this.place = [];
+    fireRentPlaceEvent(event) {
+        EventService.rentPlaceEvt(this.place.Id, this);
     }
 }

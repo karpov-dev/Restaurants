@@ -4,6 +4,8 @@ const DATA_LOADING_MESSAGE = 'Loading data';
 const DATA_LOADING_ICON = 'standard:loop';
 const ALL_DATA_WAS_LOADED_MESSAGE = 'All data was loaded';
 const ALL_DATA_WAS_LOADED_ICON = 'standard:task';
+const DATA_NOT_FOUND = 'Data not found';
+const DATA_NOT_FOUND_ICON = 'standard:first_non_empty';
 
 export class helper {
     static lastRequest = null;
@@ -30,7 +32,12 @@ export class helper {
                     this.loadData(this.lastRequest.filters, this.lastRequest.fields, this.lastRequest.parent, true);
                     this.lastRequest = null;
                 } else {
-                    this.showTableMessage(ALL_DATA_WAS_LOADED_MESSAGE, ALL_DATA_WAS_LOADED_ICON, parent);
+                    if (parent.loadOffset === 0 && result.length === 0) {
+                        this.showTableMessage(DATA_NOT_FOUND, DATA_NOT_FOUND_ICON, parent);
+                    }
+                    else {
+                        this.showTableMessage(ALL_DATA_WAS_LOADED_MESSAGE, ALL_DATA_WAS_LOADED_ICON, parent);
+                    }
                     console.info('Data was loaded. Restaurants: %s, offset: %s', result, parent.loadOffset);
                 }
             });

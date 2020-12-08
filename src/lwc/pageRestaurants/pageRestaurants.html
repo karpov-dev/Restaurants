@@ -1,4 +1,17 @@
 <template>
+    <c-modal-window data-id="loginModal">
+        <div slot="mainSpace">
+            <c-page-manager >
+                <div slot="1" data-id="authWithReg">
+                    <c-auth-with-registration onlogin={onLoginSuccess}></c-auth-with-registration>
+                </div>
+                <div slot="2" data-id="orderRegistration" style="display: grid;">
+                    <c-order-registration user-id={getUserId} product-id={getPlaceId}></c-order-registration>
+                </div>
+            </c-page-manager>
+        </div>
+    </c-modal-window>
+
     <div class="header-position">
         <c-page-header user-id={getUserId}></c-page-header>
     </div>

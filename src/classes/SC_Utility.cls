@@ -25,4 +25,14 @@ public without sharing class SC_Utility {
 
         return ids;
     }
+
+    public static String getSoqlRequest(Id objId, String objName, List<String> fieldsToReturn) {
+        if (String.isBlank(objId) || fieldsToReturn == null || fieldsToReturn.isEmpty() || String.isBlank(objName)) {
+            throw new SC_Exception('Can not return contact. Contact Id or fields to return is empty');
+        }
+
+        return 'SELECT ' + String.join(fieldsToReturn, ',') + ' ' +
+                'FROM ' + objName + ' ' +
+                'WHERE Id = ' + '\'' + objId + '\'';
+    }
 }

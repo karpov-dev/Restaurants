@@ -6,6 +6,7 @@ import {DomService} from "c/domService";
 import {helper} from "./helper";
 
 const FIELDS_TO_LOAD = ['Id', 'Name', 'Address__c', 'Description__c', 'Phone__c', 'Views__c', 'Geolocation__Latitude__s', 'Geolocation__Longitude__s'];
+const DEFAULT_DIRECTION = Filters.ADDITIONAL_OPERATOR.ASC;
 const PIXELS_TO_LOAD_RECORDS = 100;
 const LOAD_LIMIT = 9;
 
@@ -19,18 +20,14 @@ export default class RestaurantsTable extends LightningElement {
     isUpdateData = false;
     loadOffset = 0;
 
+    get getDirection() {
+        return DEFAULT_DIRECTION;
+    }
+
     constructor() {
         super();
-        EventService.addEventListner(window, 'scroll', this.documentOnscroll(this, FIELDS_TO_LOAD));
-        EventService.addEventListner(this, EventService.EVENT_NAMES.filterElement, this.setFilter);
-
-        const orderByNameFilter = Filters.createSpecifyFilter(Filters.OPERATORS.ORDER_BY, 'Name');
-        const limitFilter = Filters.createSpecifyFilter(Filters.OPERATORS.LIMIT, LOAD_LIMIT);
-        const offsetFilter = Filters.createSpecifyFilter(Filters.OPERATORS.OFFSET, this.loadOffset);
-        this.filtersHelper.insert(limitFilter);
-        this.filtersHelper.insert(offsetFilter);
-        this.filtersHelper.insert(orderByNameFilter);
-
+        this.eventsSetup();
+        this.filtersSetup()
         helper.loadData(this.filtersHelper.getFilters, FIELDS_TO_LOAD, this);
     }
 
@@ -47,7 +44,6 @@ export default class RestaurantsTable extends LightningElement {
     }
 
     setFilter(event) {
-        event.preventDefault();
         const filter = event.detail;
         this.filtersHelper.upsert(filter);
 
@@ -56,5 +52,21 @@ export default class RestaurantsTable extends LightningElement {
         }
 
         helper.loadData(this.filtersHelper.getFilters, FIELDS_TO_LOAD, this, true);
+        event.preventDefault();
+    }
+
+    filtersSetup() {
+        const orderByNameFilter = Filters.createSpecifyFilter(Filters.OPERATORS.ORDER_BY, 'Name', DEFAULT_DIRECTION);
+        const limitFilter = Filters.createSpecifyFilter(Filters.OPERATORS.LIMIT, LOAD_LIMIT);
+        const offsetFilter = Filters.createSpecifyFilter(Filters.OPERATORS.OFFSET, this.loadOffset);
+
+        this.filtersHelper.insert(limitFilter);
+        this.filtersHelper.insert(offsetFilter);
+        this.filtersHelper.insert(orderByNameFilter);
+    }
+
+    eventsSetup() {
+        EventService.addEventListner(window, 'scroll', this.documentOnscroll(this, FIELDS_TO_LOAD));
+        EventService.addEventListner(this, EventService.EVENT_NAMES.filterElement, this.setFilter);
     }
 }

@@ -14,6 +14,8 @@ public with sharing class QS_QueryConstants {
     public static final String AND_SOQL = 'AND';
     public static final String NOT_SOQL = 'NOT';
     public static final String LIKE_SOQL = 'LIKE';
+    public static final String ASC_SOQL = 'ASC';
+    public static final String DESC_SOQL = 'DESC';
 
     //SOQL operators
     public static final String NONE = 'none';

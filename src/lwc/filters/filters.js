@@ -5,10 +5,7 @@ class Filters {
     filters = [];
 
     getByName(name) {
-        if (!name) {
-            console.error('Can not find filter by name. Name = %s', name);
-            return null;
-        }
+        if (!name) return null;
 
         for (let i = 0; i < this.filters.length; i++) {
             if (this.filters[i].name === name) {
@@ -42,10 +39,13 @@ class Filters {
         }
 
         const filterToUpdate = this.getByName(filter.name);
-        if (filterToUpdate) {
+        const filterToUpdateByPreviousName = this.getByName(filter.previousName);
+
+        if (filterToUpdate || filterToUpdateByPreviousName) {
             filterToUpdate.field = filter.field;
             filterToUpdate.value = filter.value;
             filterToUpdate.operator = filter.operator;
+            filterToUpdate.additionalOperator = filter.additionalOperator;
             return filterToUpdate;
         }
 
@@ -121,30 +121,38 @@ class Filters {
         else return this.filters;
     }
 
-    static create(type, field, value, operator, subtype) {
+    static create(type, field, value, operator, subtype, additionalOperator=null, previousName=null) {
         return {
+            previousName: previousName,
             name: type + field,
             subtype: subtype,
             type: type,
             field: field,
             value: value,
-            operator: operator
+            operator: operator,
+            additionalOperator: additionalOperator
         };
     }
 
-    static createSpecifyFilter(operator, value) {
+    static createSpecifyFilter(operator, value, additionalOperator=null) {
         if (!(operator)) {
             console.error('Can not create specify. Operator = %s, Value = %s', operator, value);
             return null;
         }
 
+        let subtype;
+        if (additionalOperator) subtype = this.SUBTYPE.EXPRESSION;
+        else subtype = this.SUBTYPE.SPECIAL;
+
         return {
+            previousName: null,
             name: operator,
-            subtype: this.SUBTYPE.SPECIAL,
+            subtype: subtype,
             type: null,
             field: null,
             value: value,
-            operator: operator
+            operator: operator,
+            additionalOperator: additionalOperator
         }
     }
 
@@ -184,6 +192,11 @@ class Filters {
         OFFSET: 'OFFSET',
         ORDER_BY: 'ORDER BY',
         NONE: 'none'
+    }
+
+    static ADDITIONAL_OPERATOR = {
+        ASC: 'ASC',
+        DESC: 'DESC'
     }
 }
 
