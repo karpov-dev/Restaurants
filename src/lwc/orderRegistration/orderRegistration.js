@@ -1,52 +1,95 @@
 import {LightningElement, api, track} from 'lwc';
 
-import getProductInfoApex from '@salesforce/apex/SC_ProductService.getProductById';
-import getUserInfoApex from '@salesforce/apex/SC_UserService.getUserById'
-import getRestaurantApex from '@salesforce/apex/SC_RestaurantsService.getRestaurantById';
-
 import {ErrorService} from "c/errorService";
+import {Utility} from "c/utility";
+import {ValidationService} from "c/validationService";
+import {EventService} from "c/eventService";
 
-const FIELDS_FOR_USER = ['Id', 'FirstName', 'LastName', 'Email', 'Username__c', 'Phone'];
-const FIELDS_FOR_PRODUCT = ['Id', 'Name', 'Price__c', 'Restaurant__c'];
-const FIELDS_FOR_RESTAURANT = ['Id', 'Name', 'Address__c', 'Phone__c'];
-
+import {helper} from "./helper";
+import {loaders} from "./loaders";
 
 export default class OrderRegistration extends LightningElement {
-    @api
-    get userId() {return this.user.Id;}
-    set userId(value) {this.loadUser(value);}
-
-    @api
-    get productId() {return this.product.Id;}
-    set productId(value) {this.loadProduct(value)}
-
     @track user = {Id:'', FirstName:'', LastName:'', Email:'', Username__c:'', Phone:''};
     @track product = {Id:'', Name:'', Conveniences__c:'', Price__c:'', Restaurant__c:''};
     @track restaurant = {Id:'', Name:'', Address__c:'', Phone__c:''}
 
-    loadProduct(productId) {
-        getProductInfoApex({productId: productId, fieldsToRetrieve: FIELDS_FOR_PRODUCT})
-            .then(result => {
-                this.product = result;
-                this.loadRestaurant(result.Restaurant__c);
-            })
-            .catch(error => ErrorService.logError(error));
+    @track startRentDate;
+    @track endRentDate;
+    nextButtonIsDisabled = true;
+
+    @api
+    get userId() {return this.user.Id;}
+    set userId(value) {
+        if (value) loaders.loadUser(value, this);
     }
 
-    loadUser(userId) {
-        getUserInfoApex({userId: userId, fieldsToRetrieve: FIELDS_FOR_USER})
-            .then(result => {
-                this.user = result
-            })
-            .catch(error => ErrorService.logError(error));
+    @api
+    get productId() {return this.product.Id;}
+    set productId(value) {
+        if (value) loaders.loadProduct(value, this);
     }
 
-    loadRestaurant(restaurantId) {
-        getRestaurantApex({restaurantId: restaurantId, fields: FIELDS_FOR_RESTAURANT})
-            .then(result => {
-                console.log(result);
-                this.restaurant = result;
-            })
-            .catch(error => ErrorService.logError(error));
+    dateTimeInputHandler(event) {
+        helper.parsingInput(event, this);
+        this.nextButtonIsDisabled = !this.dateValidation();
+    }
+
+    registrationOrder(event) {
+        loaders.loadAvailability(this.product.Id, this);
+    }
+
+    productIsAvailable() {
+        this.createOrder();
+    }
+
+    productIsNotAvailable() {
+        helper.showToastMessage('warning', 'The place is already booked for this period of time', this);
+    }
+
+    productWasCreated(result) {
+        helper.showToastMessage('success', 'Success. Order Was Created!', this);
+        EventService.orderWasCreatedEvt(result.Id, this);
+    }
+
+    dateValidation() {
+        if (!this.startRentDate || !this.endRentDate) return false;
+
+        const startDateMs = Utility.toNumberMsDate(this.startRentDate);
+        const endDateMs = Utility.toNumberMsDate(this.endRentDate);
+        const todayMs = Utility.toNumberMsDate(new Date());
+        const msInDay = 86400000;
+
+        const isEndLessOrEqualStart = ValidationService.oneMoreOrEqualThenTwo(startDateMs, endDateMs);
+        const isStartLessOrEqualToday = ValidationService.oneMoreOrEqualThenTwo(todayMs, startDateMs);
+        const isEndLessOrEqualToday = ValidationService.oneMoreOrEqualThenTwo(todayMs, endDateMs);
+        const moreThanDay = (endDateMs - startDateMs) > msInDay;
+
+        if (isEndLessOrEqualStart) helper.showToastMessage('error', 'End Date less or equal start Date', this);
+        if (isStartLessOrEqualToday) helper.showToastMessage('error', 'Start date less or equal now', this);
+        if (isEndLessOrEqualToday) helper.showToastMessage('error', 'End date less or equal now', this);
+        if (moreThanDay) helper.showToastMessage('error', 'Maximum period is one day', this);
+
+        return !isEndLessOrEqualStart && !isStartLessOrEqualToday && !isEndLessOrEqualToday && !moreThanDay
+    }
+
+    createOrder() {
+        const orderName = this.restaurant.Name + '. Table: ' + this.product.Name + '. ';
+        const orderDescription = new Date(this.startRentDate).toDateString() + ' ' + new Date(this.startRentDate).toTimeString() + '-'
+            + new Date(this.endRentDate).toDateString() + ' ' + new Date(this.endRentDate).toTimeString()
+
+        const order = {
+            Name: orderName,
+            Description: orderDescription,
+            Start_Rent__c: this.startRentDate,
+            End_Rent__c: this.endRentDate,
+            CloseDate: this.endRentDate,
+            Price__c: this.product.Price__c,
+            Product__c: this.product.Id,
+            Restaurant__c: this.restaurant.Id,
+            Contact__c: this.user.Id,
+            StageName: 'Open Rent'
+        }
+
+        loaders.createOrderOnServer(order, this);
     }
 }

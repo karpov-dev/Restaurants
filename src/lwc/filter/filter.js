@@ -6,6 +6,7 @@ import {Utility} from "c/utility";
 const DEFAULT_OPERATOR = Filters.OPERATORS.NONE;
 
 export default class Filter extends LightningElement {
+    @api filterName;
     @api name;
     @api type;
     @api field;
@@ -26,7 +27,7 @@ export default class Filter extends LightningElement {
     }
 
     fireFilter() {
-        const filter = Filters.create(this.type, this.field, this.value, this.operator, Filters.SUBTYPE.EXPRESSION);
+        const filter = Filters.create(this.filterName, this.type, this.field, this.value, this.operator, Filters.SUBTYPE.EXPRESSION);
         EventService.filterElement(filter, this);
     }
 

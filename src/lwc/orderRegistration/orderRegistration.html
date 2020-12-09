@@ -1,6 +1,7 @@
 <template>
     <lightning-card title="Order Registration" icon-name="standard:buyer_account">
         <div class="slds-m-around_small shadow">
+
             <lightning-card title="Check Personal Information" icon-name="standard:lead">
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr)">
                     <c-display-box>Name:</c-display-box>
@@ -37,9 +38,24 @@
             </lightning-card>
         </div>
 
-        <div class="slds-m-around_medium">
-            <button class="slds-button slds-button_outline-brand slds-button_stretch">Create Order</button>
+        <div class="slds-m-around_small shadow">
+            <lightning-card title="Rent Information" icon-name="standard:today">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr);">
+                    <div class="slds-m-around_small">
+                        <lightning-input name="StartDateTime" title="Start Rent" label="Rent From" type="datetime"
+                                         value={startRentDate} timezone="Europe/Minsk" onchange={dateTimeInputHandler}></lightning-input>
+                    </div>
+                    <div class="slds-m-around_small">
+                        <lightning-input name="EndDateTime" title="Stop Rent" label="Rent To" type="datetime"
+                                         value={endRentDate} timezone="Europe/Minsk" onchange={dateTimeInputHandler} ></lightning-input>
+                    </div>
+                </div>
+            </lightning-card>
         </div>
+
+        <p slot="footer">
+            <button class="slds-button slds-button_outline-brand slds-button_stretch" disabled={nextButtonIsDisabled} onclick={registrationOrder}>Create Order</button>
+        </p>
 
     </lightning-card>
 </template>

@@ -38,6 +38,7 @@ export default class PlacesTable extends LightningElement {
         }
         this.restaurantId = restaurantId;
 
+        helper.refreshLoader(this);
         this.setupFilters();
         helper.loadData(this.filtersHelper.getFilters, FIELDS, this, true);
     }
@@ -64,7 +65,8 @@ export default class PlacesTable extends LightningElement {
     }
 
     setupFilters() {
-        const restaurantFilter = Filters.create(Filters.TYPES.STRING_TYPE, 'Restaurant__c', this.restaurantId, Filters.OPERATORS.EQUAL, Filters.SUBTYPE.EXPRESSION);
+        const restaurantFilter = Filters.create('Restaurant_Id', Filters.TYPES.STRING_TYPE, 'Restaurant__c', this.restaurantId, Filters.OPERATORS.EQUAL,
+            Filters.SUBTYPE.EXPRESSION);
         this.filtersHelper.upsert(restaurantFilter);
     }
 }

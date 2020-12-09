@@ -1,11 +1,8 @@
 <template>
-    <button class="slds-button slds-m-right_small" title="Profile">
-        <lightning-icon icon-name="standard:employee_contact"></lightning-icon>
+    <button class="slds-button slds-m-right_small scale-transform animation-fast" title="Profile">
+        <lightning-icon icon-name="standard:employee_contact" onclick={openUserBox}></lightning-icon>
     </button>
-    <button class="slds-button slds-m-right_small" title="Basket">
-        <lightning-icon icon-name="standard:webcart"></lightning-icon>
-    </button>
-    <button class="slds-button slds-m-right_small" title="Log Out" onclick={logout}>
+    <button class="slds-button slds-m-right_small scale-transform animation-fast" title="Log Out" onclick={logout}>
         <lightning-icon icon-name="standard:outcome"></lightning-icon>
     </button>
 </template>

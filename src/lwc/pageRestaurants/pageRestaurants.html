@@ -5,8 +5,11 @@
                 <div slot="1" data-id="authWithReg">
                     <c-auth-with-registration onlogin={onLoginSuccess}></c-auth-with-registration>
                 </div>
-                <div slot="2" data-id="orderRegistration" style="display: grid;">
+                <div slot="2" data-id="orderRegistration">
                     <c-order-registration user-id={getUserId} product-id={getPlaceId}></c-order-registration>
+                </div>
+                <div slot="3" data-id="userBox" style="height: 700px;">
+                    <c-user-box user-id={getUserId}></c-user-box>
                 </div>
             </c-page-manager>
         </div>

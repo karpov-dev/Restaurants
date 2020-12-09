@@ -11,11 +11,11 @@ class QueueFunctions {
     }
 
     popElement() {
-        this.queue.pop()();
+        if (this.queue) this.queue.pop()();
     }
 
     shiftElement() {
-        this.queue.shift()();
+        if(this.queue && this.queue.length > 0) this.queue.shift()();
     }
 
     clear() {

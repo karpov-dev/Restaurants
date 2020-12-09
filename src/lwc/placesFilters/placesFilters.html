@@ -1,9 +1,10 @@
 <template>
     <div data-id="filters" class="slds-hide slds-card slds-p-around_xx-small shadow animation-fast">
-        <c-search-box type="string" field="Name" operator="contains"></c-search-box>
+        <c-search-box filter-name="Searcher_Product_Name" type="string" field="Name" operator="contains"></c-search-box>
 
         <div class="animation-fast slds-is-relative" style="z-index: 1;">
-            <c-filter name="Price" type="data" field="Price__c" variant="number"></c-filter>
+            <c-filter filter-name="Product_Price_One" name="Price" type="data" field="Price__c" variant="number"></c-filter>
+            <c-filter filter-name="Product_Price_Two" name="Price" type="data" field="Price__c" variant="number"></c-filter>
             <c-filter-order fields-for-order="Price__c"></c-filter-order>
         </div>
     </div>

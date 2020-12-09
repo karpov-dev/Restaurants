@@ -7,4 +7,8 @@ export default class UserHeaderPanel extends LightningElement {
     logout(event) {
         EventService.logoutEvt(this);
     }
+
+    openUserBox(event) {
+        EventService.openUserBoxEvt(this);
+    }
 }

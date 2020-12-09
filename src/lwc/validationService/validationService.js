@@ -10,6 +10,14 @@ class ValidationService {
 
         return phoneRegex.test(phone);
     }
+
+    static oneMoreThenTwo(one, two) {
+        return one > two;
+    }
+
+    static oneMoreOrEqualThenTwo(one, two) {
+        return one >= two;
+    }
 }
 
 export {ValidationService}

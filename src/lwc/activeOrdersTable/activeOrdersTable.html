@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Active Orders" icon-name="standard:data_streams">
+        <template for:each={activeOrders} for:item='order'>
+            <div key={order.Id} class="slds-m-around_small">
+                <c-active-order-card order={order}></c-active-order-card>
+            </div>
+        </template>
+    </lightning-card>
+</template>

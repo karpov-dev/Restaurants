@@ -12,4 +12,16 @@ public without sharing class SC_ProductService {
 
         return MC_ProductManager.getProductById(productId, fieldsToRetrieve);
     }
+
+    @AuraEnabled
+    public static Boolean timeToRentIsAvailable(Id productId, Datetime startDateTime, Datetime endDateTime) {
+        if (startDateTime == null || endDateTime == null || String.isBlank(productId)) {
+            throw new SC_Exception('Start time, end time or product id is empty');
+        }
+
+        List<Opportunity> opportunities = MC_OpportunityManager.getOpportunityByTime(productId, startDateTime, endDateTime);
+
+        if (opportunities.isEmpty()) return true;
+        return false;
+    }
 }

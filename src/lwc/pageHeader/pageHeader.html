@@ -2,9 +2,6 @@
     <div class="border-radius-medium shadow">
         <lightning-card title="Restaurant Rent" icon-name="standard:lead_list">
             <div slot="actions">
-                <button class="slds-button slds-m-right_small" title="Support">
-                    <lightning-icon icon-name="standard:email_chatter"></lightning-icon>
-                </button>
                 <template if:true={isUserMode}>
                     <c-user-header-panel user-id={getUserId}></c-user-header-panel>
                 </template>

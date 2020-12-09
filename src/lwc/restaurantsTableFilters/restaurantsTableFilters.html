@@ -1,7 +1,7 @@
 <template>
     <div class="slds-card slds-p-around_xx-small shadow animation-fast">
         <div class="grid-setting">
-            <c-search-box type="string" field="Name" operator="contains"></c-search-box>
+            <c-search-box filter-name="Search_Filter_Name" type="string" field="Name" operator="contains"></c-search-box>
 
             <div class="button-position">
                 <lightning-button-icon icon-name="standard:slider" onclick={showHideMoreFilters}></lightning-button-icon>
@@ -9,8 +9,8 @@
         </div>
 
         <div data-id="moreFilters" class="slds-hide animation-fast slds-is-relative" style="z-index: 1;">
-            <c-filter name="Phone" type="string" field="Phone__c" variant="tel"></c-filter>
-            <c-filter name="Views" type="data" field="Views__c" variant="number"></c-filter>
+            <c-filter filter-name="Restaurant_Phone" name="Phone" type="string" field="Phone__c" variant="tel"></c-filter>
+            <c-filter filter-name="Restaurant_Views" name="Views" type="data" field="Views__c" variant="number"></c-filter>
             <c-filter-order fields-for-order="Name Views__c"></c-filter-order>
         </div>
     </div>

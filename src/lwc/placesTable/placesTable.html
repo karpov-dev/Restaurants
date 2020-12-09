@@ -8,13 +8,15 @@
             <c-places-filters></c-places-filters>
         </div>
 
-        <template for:each={places} for:item="place">
-            <div key={place.Id} class="slds-m-bottom_small slds-m-horizontal_large shadow-low scale-transform animation-fast">
-                <c-place-card place={place}></c-place-card>
+        <div class="slds-scrollable_y" style="height: 500px;">
+            <template for:each={places} for:item="place">
+                <div key={place.Id} class="slds-m-bottom_small slds-m-horizontal_large shadow-low scale-transform animation-fast">
+                    <c-place-card place={place}></c-place-card>
+                </div>
+            </template>
+            <div class="slds-m-bottom_small slds-m-horizontal_large">
+                <c-message-card style="display: grid;"></c-message-card>
             </div>
-        </template>
-        <div class="slds-m-bottom_small slds-m-horizontal_large">
-            <c-message-card style="display: grid;"></c-message-card>
         </div>
 
     </lightning-card>

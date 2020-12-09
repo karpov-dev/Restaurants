@@ -12,6 +12,16 @@ class Utility {
 
         return options;
     }
+
+    static toNumberMsDate(dateValue) {
+        if (!dateValue) {
+            console.error("Can not convert date to ms; Date: %s", dateValue);
+            return null;
+        }
+
+        const dateTime = new Date(dateValue);
+        return +dateTime;
+    }
 }
 
 export {Utility}

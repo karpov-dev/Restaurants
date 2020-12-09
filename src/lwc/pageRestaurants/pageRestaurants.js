@@ -20,6 +20,8 @@ export default class PageRestaurants extends LightningElement {
         EventService.addEventListner(this, EventService.EVENT_NAMES.rentPlaceEvt, this.rentPlaceHandler);
         EventService.addEventListner(this, EventService.EVENT_NAMES.openLoginModal, this.openModalWithElement(this, 'authWithReg'));
         EventService.addEventListner(this, EventService.EVENT_NAMES.manualCloseModal, this.onManualCloseModal);
+        EventService.addEventListner(this, EventService.EVENT_NAMES.orderWasCreated, this.onOrderWasCreated);
+        EventService.addEventListner(this, EventService.EVENT_NAMES.openUserBox, this.openUserBox);
     }
 
     showOnMapHandler(event) {
@@ -29,6 +31,15 @@ export default class PageRestaurants extends LightningElement {
     moreRestaurantHandler(event) {
         helper.setMainRestaurantId(event.detail);
         helper.changeDescriptionVisibility(event.detail);
+    }
+
+    openUserBox(event) {
+        this.openModalWithElement(this, 'userBox')();
+    }
+
+    onOrderWasCreated(event) {
+        this.closeModal();
+        this.nextQueueElement();
     }
 
     rentPlaceHandler(event) {
@@ -46,7 +57,9 @@ export default class PageRestaurants extends LightningElement {
     }
 
     nextQueueElement() {
-        this.queueFunctions.shiftElement();
+        if (this.queueFunctions) {
+            this.queueFunctions.shiftElement();
+        }
     }
 
     openModalWithElement = (parent, elementName) => () => {

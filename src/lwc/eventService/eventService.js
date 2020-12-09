@@ -16,7 +16,9 @@ class EventService {
         rentPlaceEvt: 'rentPlace',
         openLoginModal: 'openLoginModal',
         nextQueueEvt: 'nextQueue',
-        manualCloseModal: 'manualCloseModal'
+        manualCloseModal: 'manualCloseModal',
+        orderWasCreated: 'orderWasCreated',
+        openUserBox: 'openUserBox'
     }
 
     static showToastEvt(title, message, variant, sender) {
@@ -86,6 +88,14 @@ class EventService {
 
     static nextQueueEvt(sender) {
         sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.nextQueueEvt));
+    }
+
+    static openUserBoxEvt(sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.openUserBox));
+    }
+
+    static orderWasCreatedEvt(orderId, sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.orderWasCreated), orderId);
     }
 
     static getEvent(name, detail = null, bubbles = true, composed = true) {

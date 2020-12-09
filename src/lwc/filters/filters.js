@@ -121,10 +121,9 @@ class Filters {
         else return this.filters;
     }
 
-    static create(type, field, value, operator, subtype, additionalOperator=null, previousName=null) {
+    static create(name, type, field, value, operator, subtype, additionalOperator=null) {
         return {
-            previousName: previousName,
-            name: type + field,
+            name: name,
             subtype: subtype,
             type: type,
             field: field,
@@ -145,7 +144,6 @@ class Filters {
         else subtype = this.SUBTYPE.SPECIAL;
 
         return {
-            previousName: null,
             name: operator,
             subtype: subtype,
             type: null,
