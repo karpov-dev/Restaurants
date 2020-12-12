@@ -1,13 +1,20 @@
 <template>
     <lightning-tabset>
         <lightning-tab label="User">
-            <c-user-info user-id={userId}></c-user-info>
+            <div class="slds-scrollable_y" style="height: 500px;">
+                <c-user-card user-id={userId}></c-user-card>
+            </div>
         </lightning-tab>
         <lightning-tab label="Active Orders">
-            <c-active-orders-table user-id={userId}></c-active-orders-table>
+            <div class="slds-scrollable_y" style="height: 500px;">
+                <c-active-orders-table stage-name="Open Rent" user-id={userId}></c-active-orders-table>
+            </div>
         </lightning-tab>
-        <lightning-tab label="History Orders">
-            <c-history-orders-table user-id={userId}></c-history-orders-table>
+        <lightning-tab label="History of Orders">
+            <div class="slds-scrollable_y" style="height: 500px;">
+                <c-active-orders-table stage-name="Closed Won" user-id={userId}></c-active-orders-table>
+                <c-active-orders-table stage-name="Closed Lost" user-id={userId}></c-active-orders-table>
+            </div>
         </lightning-tab>
     </lightning-tabset>
 </template>

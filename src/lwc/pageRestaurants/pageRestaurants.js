@@ -22,6 +22,7 @@ export default class PageRestaurants extends LightningElement {
         EventService.addEventListner(this, EventService.EVENT_NAMES.manualCloseModal, this.onManualCloseModal);
         EventService.addEventListner(this, EventService.EVENT_NAMES.orderWasCreated, this.onOrderWasCreated);
         EventService.addEventListner(this, EventService.EVENT_NAMES.openUserBox, this.openUserBox);
+        EventService.addEventListner(this, EventService.EVENT_NAMES.orderWasDeleted, this.refreshOrders);
     }
 
     showOnMapHandler(event) {
@@ -38,6 +39,7 @@ export default class PageRestaurants extends LightningElement {
     }
 
     onOrderWasCreated(event) {
+        this.refreshOrders();
         this.closeModal();
         this.nextQueueElement();
     }
@@ -87,6 +89,11 @@ export default class PageRestaurants extends LightningElement {
     closeModal() {
         const modal = DomService.getElementByDataId('loginModal', this);
         modal.hide();
+    }
+
+    refreshOrders() {
+        const userBox = DomService.getElementByTag('c-user-box', this);
+        userBox.refresh();
     }
 
     get getUserId() {

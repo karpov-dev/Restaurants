@@ -1,0 +1,7 @@
+@import "c/cssClasses";
+
+.box-style {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+}

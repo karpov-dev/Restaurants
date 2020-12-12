@@ -22,6 +22,23 @@ class Utility {
         const dateTime = new Date(dateValue);
         return +dateTime;
     }
+
+    static toStringDateTime(dateTime) {
+        if (!dateTime) {
+            console.error("Datetime is empty to convert to string");
+            return null;
+        }
+
+        return dateTime.toDateString() + ' ' + dateTime.toTimeString().split(' ')[0];
+    }
+
+    static addCookie(name, value) {
+        document.cookie = name + '=' + value;
+    }
+
+    static getCookie(name) {
+        return document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    }
 }
 
 export {Utility}

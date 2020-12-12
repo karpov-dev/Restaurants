@@ -14,44 +14,42 @@ const FIELDS_FOR_RESTAURANT = ['Id', 'Name', 'Address__c', 'Phone__c'];
 
 export class loaders {
     static loadProduct(productId, cmp) {
+        helper.showSpinner(cmp);
         getProductInfoApex({productId: productId, fieldsToRetrieve: FIELDS_FOR_PRODUCT})
-            .then(result => {
-                cmp.product = result;
-                this.loadRestaurant(result.Restaurant__c, cmp);
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => cmp.productIsLoaded(result))
+            .catch(error => ErrorService.logError(error))
+            .finally(() => helper.hideSpinner(cmp));
     }
 
     static loadUser(userId, cmp) {
-        getUserInfoApex({userId: userId, fieldsToRetrieve: FIELDS_FOR_USER})
-            .then(result => {
-                cmp.user = result
-            })
-            .catch(error => ErrorService.logError(error));
+        helper.showSpinner(cmp);
+        getUserInfoApex({"userId": userId, "fieldsToRetrieve": FIELDS_FOR_USER})
+            .then(result => cmp.userIsLoaded(result))
+            .catch(error => ErrorService.logError(error))
+            .finally(() => helper.hideSpinner(cmp));
     }
 
     static loadRestaurant(restaurantId, cmp) {
+        helper.showSpinner(cmp);
         getRestaurantApex({restaurantId: restaurantId, fields: FIELDS_FOR_RESTAURANT})
-            .then(result => {
-                cmp.restaurant = result;
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => cmp.restaurantIsLoaded(result))
+            .catch(error => ErrorService.logError(error))
+            .finally(() => helper.hideSpinner(cmp));
     }
 
     static loadAvailability(productId, cmp) {
+        helper.showSpinner(cmp);
         dateTimeIsAvailableApex({productId: cmp.product.Id ,startDateTime: cmp.startRentDate, endDateTime: cmp.endRentDate })
-            .then(result => {
-                if (result) cmp.productIsAvailable();
-                else cmp.productIsNotAvailable();
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => cmp.availabilityIsLoaded(result))
+            .catch(error => ErrorService.logError(error))
+            .finally(() => helper.hideSpinner(cmp));
     }
 
     static createOrderOnServer(order, cmp) {
+        helper.showSpinner(cmp);
         createOrderApex({opportunity: order})
-            .then(result => {
-                cmp.productWasCreated(result);
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => cmp.orderIsCreated(result))
+            .catch(error => ErrorService.logError(error))
+            .finally(() => helper.hideSpinner(cmp));
     }
 }

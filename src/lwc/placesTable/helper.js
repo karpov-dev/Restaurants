@@ -1,5 +1,6 @@
 import getPlacesApex from '@salesforce/apex/SC_ProductService.getProductsByFilters';
 import {DomService} from "c/domService";
+import {ErrorService} from "c/errorService";
 
 const DATA_LOADING_MESSAGE = 'Loading data';
 const DATA_LOADING_ICON = 'standard:loop';
@@ -37,7 +38,8 @@ export class helper {
                     }
                     console.info('Data was loaded. Places: %s', result);
                 }
-            });
+            })
+            .catch(error => ErrorService.logError(error, parent));
     }
 
     static saveLastRequest(filters, fields, parent) {

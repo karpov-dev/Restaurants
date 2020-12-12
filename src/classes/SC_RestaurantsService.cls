@@ -12,4 +12,17 @@ public without sharing class SC_RestaurantsService {
 
         return MC_RestaurantManager.getRestaurantById(restaurantId, fields);
     }
+
+    @AuraEnabled
+    public static String addRestaurantView(Id restaurantId) {
+        if (String.isBlank(restaurantId)) {
+            throw new SC_Exception('Can not add view. RestaurantId is empty');
+        }
+
+        Restaurant__c restaurant = MC_RestaurantManager.getRestaurantById(restaurantId, new List<String> {'Id', 'Views__c'});
+        restaurant.Views__c++;
+        update restaurant;
+
+        return restaurant.Id;
+    }
 }

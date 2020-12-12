@@ -11,7 +11,7 @@ class RestaurantsService {
 
         return getRestaurants({JSONData: JSON.stringify(filters), fields: fields})
             .then(result => {return result})
-            .catch(error => ErrorService.logError(error));
+            .catch(error => ErrorService.logError(error, ));
     }
 
     static getRestaurantById(restaurantId, fields, owner) {
@@ -22,7 +22,7 @@ class RestaurantsService {
 
         return getRestaurant({restaurantId: restaurantId, fields: fields})
             .then(result => owner.setRestaurant(result))
-            .catch(error => ErrorService.logError(error));
+            .catch(error => ErrorService.logError(error, owner));
     }
 
 }

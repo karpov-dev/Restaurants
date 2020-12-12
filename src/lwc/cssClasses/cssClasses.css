@@ -13,3 +13,15 @@
     transform: scale(1.03);
     box-shadow: 7px 7px 15px rgba(0,0,0,0.5);
 }
+
+.border-success:nth-child(even) {
+    border-color: greenyellow;
+}
+
+.border-warning {
+    border-color: coral;
+}
+
+.border-error {
+    border-color: red;
+}

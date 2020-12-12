@@ -6,6 +6,7 @@ import serverHasErrorMessage from '@salesforce/label/c.Server_has_error_message'
 import {EventService} from "c/eventService";
 import {helper} from "./helper";
 import {DomService} from "c/domService";
+import {Utility} from "c/utility";
 
 export default class MainComponentManager extends LightningElement {
     userId;
@@ -34,9 +35,15 @@ export default class MainComponentManager extends LightningElement {
 
     loginUser(event) {
         this.userId = event.detail;
+        Utility.addCookie('userId', this.userId);
     }
 
     logoutUser(event) {
-        this.userId = null;
+        this.userId = undefined;
+        Utility.addCookie('userId', undefined);
+    }
+
+    get getUserId() {
+        return this.userId;
     }
 }

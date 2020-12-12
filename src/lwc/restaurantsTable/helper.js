@@ -1,4 +1,5 @@
 import {RestaurantsService} from "c/restaurantsService";
+import {ErrorService} from "c/errorService";
 
 const DATA_LOADING_MESSAGE = 'Loading data';
 const DATA_LOADING_ICON = 'standard:loop';
@@ -40,7 +41,8 @@ export class helper {
                     }
                     console.info('Data was loaded. Restaurants: %s, offset: %s', result, parent.loadOffset);
                 }
-            });
+            })
+            .catch(error => ErrorService.logError(error, parent));
     }
 
     static showTableMessage(message, icon, parent) {

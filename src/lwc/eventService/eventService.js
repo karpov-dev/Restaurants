@@ -18,7 +18,8 @@ class EventService {
         nextQueueEvt: 'nextQueue',
         manualCloseModal: 'manualCloseModal',
         orderWasCreated: 'orderWasCreated',
-        openUserBox: 'openUserBox'
+        openUserBox: 'openUserBox',
+        orderWasDeleted: 'orderWasDeleted'
     }
 
     static showToastEvt(title, message, variant, sender) {
@@ -92,6 +93,10 @@ class EventService {
 
     static openUserBoxEvt(sender) {
         sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.openUserBox));
+    }
+
+    static orderWasDeleted(orderId, sender) {
+        sender.dispatchEvent(this.getEvent(this.EVENT_NAMES.orderWasDeleted, orderId));
     }
 
     static orderWasCreatedEvt(orderId, sender) {

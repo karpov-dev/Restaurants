@@ -18,23 +18,19 @@ class AuthorizationService {
         }
 
         return signInApex({jsonData: JSON.stringify(user)})
-            .then(result => {
-                return result;
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => {return result;})
+            .catch(error => ErrorService.logError(error, owner));
     }
 
     static signUp(user, owner) {
         if (!(user && owner)) {
-            console.error('Invalid user');
+            console.error('Invalid user or owner');
             return null;
         }
 
         return createUser({jsonData: JSON.stringify(user)})
-            .then(result => {
-                return result;
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => {return result;})
+            .catch(error => ErrorService.logError(error, owner));
     }
 
     static isAvailableEmail(email, owner) {
@@ -44,10 +40,8 @@ class AuthorizationService {
         }
 
         return emailIsAvailable({contactEmail: email})
-            .then(result => {
-                return result;
-            })
-            .catch(error => ErrorService.logError(error));
+            .then(result => {return result;})
+            .catch(error => ErrorService.logError(error, owner));
     }
 }
 

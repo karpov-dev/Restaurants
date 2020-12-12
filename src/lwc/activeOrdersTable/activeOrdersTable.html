@@ -1,9 +1,13 @@
 <template>
-    <lightning-card title="Active Orders" icon-name="standard:data_streams">
+    <lightning-card title={stageName} icon-name="standard:data_streams">
+        <div slot="actions">
+            <lightning-button-icon icon-name="action:reset_password" onclick={refreshOrders}></lightning-button-icon>
+        </div>
         <template for:each={activeOrders} for:item='order'>
             <div key={order.Id} class="slds-m-around_small">
                 <c-active-order-card order={order}></c-active-order-card>
             </div>
         </template>
+        <c-message-card style="display: grid;" class="slds-m-around_small"></c-message-card>
     </lightning-card>
 </template>

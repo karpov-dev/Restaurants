@@ -11,6 +11,7 @@ public without sharing class MC_OpportunityManager {
                 OR (Start_Rent__c <= :endDate AND End_Rent__c >= :endDate)
                 OR (Start_Rent__c >= :startDate AND End_Rent__c <= :endDate))
                 AND Product__c = :productId
+                AND StageName = 'Open Rent'
         ];
 
         return opportunities;

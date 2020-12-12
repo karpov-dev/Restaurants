@@ -44,17 +44,19 @@ export default class Registration extends LightningElement {
 
     async signUp(event) {
         EventService.spinnerEvt(true, this);
+
         if (!await validate.isAvailableEmail()) {
             EventService.showToastEvt('Oh...', 'Email is not available', 'warning', this);
             EventService.spinnerEvt(false, this);
             return false;
         }
 
-        const createdUserId = AuthorizationService.signUp(this.user);
+        const createdUserId = await AuthorizationService.signUp(this.user, this);
         if (createdUserId) {
             EventService.showToastEvt('Success', 'Account was created!', 'success', this);
             EventService.loginEvt(createdUserId, this);
         }
+
         EventService.spinnerEvt(false, this);
     }
 }

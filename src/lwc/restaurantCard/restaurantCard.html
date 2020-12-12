@@ -1,13 +1,18 @@
 <template>
     <div class="shadow border-radius-medium mouse-focus animation-fast" onclick={restaurantOnClick}>
-        <lightning-card title={restaurant.Name} icon-name="standard:opportunity">
+        <lightning-card title={restaurant.Name} icon-name="standard:delegated_account">
             <div slot="actions">
                 <c-arrow-button onclick={showMoreInfo} button-text="More Info"></c-arrow-button>
             </div>
-            <div class=slds-m-around_small>
-                <p>Phone: {restaurant.Phone__c}</p>
-                <p>Address:  {restaurant.Address__c}</p>
-                <p>Views: {restaurant.Views__c}</p>
+            <div class="slds-m-around_small" style="display: grid; grid-template-columns: 3fr 7fr;">
+                <div class="slds-m-around_xx-small">
+                    <img src={restaurantImg} alt={restaurant.Name} style="border-radius: 4px;">
+                </div>
+                <div class=slds-m-around_xx-small>
+                    <p>Phone: {restaurant.Phone__c}</p>
+                    <p>Address:  {restaurant.Address__c}</p>
+                    <p>Views: {restaurant.Views__c}</p>
+                </div>
             </div>
         </lightning-card>
     </div>

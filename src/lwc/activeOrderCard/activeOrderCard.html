@@ -1,10 +1,20 @@
 <template>
     <div class="shadow scale-transform animation-fast">
-        <lightning-card title={order.Name} icon-name="standard:data_streams">
+        <lightning-card title={order.Name} icon-name="standard:opportunity">
             <div slot="actions">
-                <lightning-button-icon icon-name="action:delete"></lightning-button-icon>
+                <lightning-button-group>
+                    <c-text-box class="border-success">{order.StageName}</c-text-box>
+                    <lightning-button-icon icon-name="action:delete" onclick={deleteOrder}></lightning-button-icon>
+                </lightning-button-group>
             </div>
-            {order.Description}
+            <div class="slds-m-around_small" style="display: grid; grid-template-columns: repeat(3, 1fr);">
+                <c-display-box>Start Rent</c-display-box>
+                <c-display-box>End Rent</c-display-box>
+                <c-display-box>Price</c-display-box>
+                <c-display-box>{order.Start_Rent__c}</c-display-box>
+                <c-display-box>{order.End_Rent__c}</c-display-box>
+                <c-display-box>{order.Price__c} BYN</c-display-box>
+            </div>
         </lightning-card>
     </div>
 </template>

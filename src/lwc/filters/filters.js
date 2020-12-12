@@ -154,7 +154,7 @@ class Filters {
         }
     }
 
-    static getAvailableOperators(type) {
+    static getAvailableOperators(type, cmp) {
         if (!type) {
             console.error('Can not return available operators to current type. Type: %s', type);
             return null;
@@ -162,7 +162,7 @@ class Filters {
 
         return getAvailableOperatorsApex({type: type})
             .then(result => {return result})
-            .catch(error => ErrorService.logError(error));
+            .catch(error => ErrorService.logError(error, cmp));
     }
 
     static TYPES = {

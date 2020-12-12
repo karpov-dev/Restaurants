@@ -18,7 +18,7 @@ export default class Filter extends LightningElement {
     @track selectedOption = DEFAULT_OPERATOR;
 
     connectedCallback() {
-        Filters.getAvailableOperators(this.type).then(result => {this.options = this.listToOptions(result)});
+        Filters.getAvailableOperators(this.type, this).then(result => {this.options = this.listToOptions(result)});
     }
 
     valueHandler(event) {

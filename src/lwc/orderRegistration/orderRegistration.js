@@ -35,20 +35,31 @@ export default class OrderRegistration extends LightningElement {
     }
 
     registrationOrder(event) {
+        EventService.spinnerEvt(true, this);
         loaders.loadAvailability(this.product.Id, this);
     }
 
-    productIsAvailable() {
-        this.createOrder();
+    productIsLoaded(loadedProduct) {
+        this.product = loadedProduct;
+        loaders.loadRestaurant(loadedProduct.Restaurant__c, this);
     }
 
-    productIsNotAvailable() {
-        helper.showToastMessage('warning', 'The place is already booked for this period of time', this);
+    userIsLoaded(loadedUser) {
+        this.user = loadedUser;
     }
 
-    productWasCreated(result) {
+    restaurantIsLoaded(loadedRestaurant) {
+        this.restaurant = loadedRestaurant;
+    }
+
+    availabilityIsLoaded(isAvailableDateTime) {
+        if (isAvailableDateTime) this.createOrder();
+        else helper.showToastMessage('warning', 'The place is already booked for this period of time', this);
+    }
+
+    orderIsCreated(createdOrder) {
         helper.showToastMessage('success', 'Success. Order Was Created!', this);
-        EventService.orderWasCreatedEvt(result.Id, this);
+        EventService.orderWasCreatedEvt(createdOrder.Id, this);
     }
 
     dateValidation() {
@@ -74,12 +85,10 @@ export default class OrderRegistration extends LightningElement {
 
     createOrder() {
         const orderName = this.restaurant.Name + '. Table: ' + this.product.Name + '. ';
-        const orderDescription = new Date(this.startRentDate).toDateString() + ' ' + new Date(this.startRentDate).toTimeString() + '-'
-            + new Date(this.endRentDate).toDateString() + ' ' + new Date(this.endRentDate).toTimeString()
 
         const order = {
             Name: orderName,
-            Description: orderDescription,
+            Description: 'Rent By Site',
             Start_Rent__c: this.startRentDate,
             End_Rent__c: this.endRentDate,
             CloseDate: this.endRentDate,

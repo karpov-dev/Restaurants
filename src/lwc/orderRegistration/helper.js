@@ -12,4 +12,12 @@ export class helper {
         if (name === 'StartDateTime') cmp.startRentDate = value;
         if (name === 'EndDateTime') cmp.endRentDate = value;
     }
+
+    static showSpinner(cmp) {
+        EventService.spinnerEvt(true, cmp);
+    }
+
+    static hideSpinner(cmp) {
+        EventService.spinnerEvt(false, cmp);
+    }
 }
