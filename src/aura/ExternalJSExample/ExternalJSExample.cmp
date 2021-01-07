@@ -1,0 +1,3 @@
+<aura:component description="ExternalJSExample">
+    <ltng:require scripts="{!$Resource.ExteranlJSExample}" afterScriptsLoaded="{!c.jsLoadedHandler}"/>
+</aura:component>
